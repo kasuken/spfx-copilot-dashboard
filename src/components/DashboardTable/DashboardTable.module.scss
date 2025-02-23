@@ -1,0 +1,32 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.dashboardTable {
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  background-color: "[theme:bodyBackground, default: #ffffff]";
+  background-color: var(--bodyBackground);
+}
+
+.rowOperations {
+  display: "flex";
+  align-items: flex-end;
+  margin: 5px;
+}
+
+.rowOperation {
+  margin: 2px;
+}
+
+.dashboardColumn {
+  font-weight: bold;
+}
+
+.nameColumn {
+  @extend .dashboardColumn;
+  
+  min-width: 50px;
+}
+
+.operationColumnHeader {
+  width: fit-content;
+}

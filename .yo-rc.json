@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.18.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.24.0"
+    },
+    "version": "1.20.0",
+    "libraryName": "spfx-copilot-dashboard",
+    "libraryId": "f6a58bd9-44b9-44b6-907f-f06fa497b9d4",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "spfx-copilot-dashboard",
+    "solutionShortDescription": "spfx-copilot-dashboard description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

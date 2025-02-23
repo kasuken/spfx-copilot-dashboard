@@ -1,0 +1,20 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.skeletonTable {
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  background-color: "[theme:bodyBackground, default: #ffffff]";
+  background-color: var(--bodyBackground);
+}
+
+.header {
+  align-items: "center";
+  display: "grid";
+  margin: 5px;
+}
+
+.row {
+  align-items: "center";
+  display: "grid";
+  margin: 5px;
+}

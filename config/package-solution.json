@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "spfx-copilot-dashboard-client-side-solution",
+    "id": "f6a58bd9-44b9-44b6-907f-f06fa497b9d4",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.20.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "spfx-copilot-dashboard description"
+      },
+      "longDescription": {
+        "default": "spfx-copilot-dashboard description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "spfx-copilot-dashboard Feature",
+        "description": "The feature that activates elements of the spfx-copilot-dashboard solution.",
+        "id": "293f577d-5970-4b1a-8fa4-4d76a3119fb5",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/spfx-copilot-dashboard.sppkg"
+  }
+}
