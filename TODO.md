@@ -2,13 +2,13 @@
 
 Here are some things that need to be done, feel free to update this file as needed:
 
-[] - @GuidoZam: create the structure of the project and the table control (functional component)
+- [x] @GuidoZam: create the structure of the project and the table control (functional component)
 
-[] - @NishkalankBezawada: create the search service
+- [ ] @NishkalankBezawada: create the search service
 
-[] - @tmaestrini/@kasuken: create the README
+- [ ] @tmaestrini/@kasuken: create the README
 
-[] - @tmaestrini: create the "Client" web part
+- [ ] @tmaestrini: create the "Client" web part
 
 # Current Notes
 
@@ -21,15 +21,15 @@ Web part or ACE (Dashboard) to retrieve all the SharePoint Agents from all the S
 
 ## Features to be implemented
 
-[] - Opening the agents
+- [ ] Opening the agents
 
-[] - Enable searching
+- [ ] Enable searching
 
-[] - Filtering by category
+- [ ] Filtering by category
 
-[] - Filtering by site
+- [ ] Filtering by site
 
-[] - Maybe adding an extension available in every lists and libraries that opens up a popup with the available agents/copilots
+- [ ] Maybe adding an extension available in every lists and libraries that opens up a popup with the available agents/copilots
 
 ## Search Query
 
