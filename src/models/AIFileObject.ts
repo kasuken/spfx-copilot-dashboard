@@ -3,3 +3,7 @@ export default class AIFileObject {
   FileUrl: string;
   FileExtension: 'copilot' | 'agent';
 }
+
+export type AIFileObjects = {
+  value: AIFileObject[];
+}
