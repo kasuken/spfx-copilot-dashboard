@@ -36,9 +36,10 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
     // Load the data from the service
     setItems(mockItems);
 
-    // TODO: Remove the following, it's only for demonstration purposes using mock data
+    // TODO: Remove the following, it's only for demonstration purposes using mock data; remember to propagate the actual search results!
     setTimeout(() => {
       setIsLoading(false);
+      props.onSearchResults({value: mockItems});
     }, 3000);
   }, []);
 
@@ -46,12 +47,12 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
     <section className={styles.dashboard}>
       <h1>{strings.Title}</h1>
       {/* Show the skeleton table while loading data */}
-      {isLoading && 
+      {isLoading &&
         <SkeletonTable />}
 
       {/* Show the table when data is loaded and there are no items available */}
-      {!isLoading && 
-        items.length === 0 && 
+      {!isLoading &&
+        items.length === 0 &&
         DashboardTable({
           items: [{
             Name: strings.Messages.NoCopilotFound,
@@ -61,8 +62,8 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
         })}
 
       {/* Show the table when data is loaded and there are items available */}
-      {!isLoading && 
-        items.length > 0 && 
+      {!isLoading &&
+        items.length > 0 &&
         DashboardTable({
           items: items
         })}
