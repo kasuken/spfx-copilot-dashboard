@@ -19,7 +19,7 @@ Do not be afraid to ask question. We are here to help you succeed in helping us 
 > [!IMPORTANT]
 > Before you start, familiarize yourself with the SPFx webpart development process. Make sure that your local dependencies on you developer machine matches the appropriate requirements.
 
-- Fork this project. When creating the fork deselect the checkbox 'Copy the `develop` branch only' to get your copy of the `develop` branch.
+- Fork this project. When creating the fork unselect the checkbox 'Copy the `main` branch only' to get your copy of the `develop` and `main` branch.
 - Clone the forked repository
 - Open the _spfx-copilot-dashboard_ project in Visual Studio Code
 - run `npm install`
