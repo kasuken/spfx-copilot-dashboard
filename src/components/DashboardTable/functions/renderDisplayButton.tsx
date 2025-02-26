@@ -10,9 +10,8 @@ export interface IRenderDisplayButtonProps {
 
 const renderDisplayButton: React.FC<IRenderDisplayButtonProps> = (props) => {
 	const { item } = props;
-	const { selectedAiFile, setSelectedAiFile } = React.useContext(AIFilesContext);
+	const { setSelectedAiFile } = React.useContext(AIFilesContext);
 
-	console.log(selectedAiFile);
 	return (
 		<Button
 			icon={<DocumentRegular />}
