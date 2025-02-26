@@ -22,7 +22,7 @@ export interface IDashboardTableProps {
 
 const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
   const { items } = props;
-  const { selectedItem } = React.useContext(AIFileContext);
+  const { selectedItem, setSelectedItem } = React.useContext(AIFileContext);
   const columns = getTableColumns();
   return (
     <AIFileContextProvider searchResultItems={items}>
@@ -43,9 +43,9 @@ const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
           </TableBody>
         </Table>
 
-        <AIFileDetails 
+        <AIFileDetails
           isOpen={selectedItem !== undefined}
-          onDismiss={() => {console.log('dismiss')}}
+          onDismiss={() => { setSelectedItem(undefined); }}
         />
       </section>
     </AIFileContextProvider>

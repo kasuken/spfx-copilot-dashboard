@@ -29,8 +29,8 @@ export const AIFileDetails: React.FC<IAIFileDetailsProps> = (props) => {
             modalProps={{
                 isBlocking: false,
                 styles: {
-                    main: { maxWidth: '90vw', width: '90vw', minWidth: '90vw', height: '90vh' },
-                    root: { maxWidth: '90vw !important', width: '90vw !important' },
+                    main: { maxWidth: '100vw', width: '100vw', minWidth: '100vw', height: '90vh' },
+                    root: { maxWidth: '100vw !important', width: '100vw !important' },
                 }
             }}>
 
