@@ -12,7 +12,7 @@ import getTableColumns from './functions/getTableColumns';
 import createTableRow from './functions/createTableRow';
 import AIFileObject from '../../models/AIFileObject';
 import { AIFileDetails } from '../AIFileDetails/AIFileDetails';
-import { AIFileContext, AIFileContextProvider } from '../../context/AIFileContext';
+import { AIFilesContext } from '../../context/AIFilesContext';
 
 
 export interface IDashboardTableProps {
@@ -22,33 +22,32 @@ export interface IDashboardTableProps {
 
 const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
   const { items } = props;
-  const { selectedItem, setSelectedItem } = React.useContext(AIFileContext);
+  const { selectedAiFile, setSelectedAiFile } = React.useContext(AIFilesContext);
   const columns = getTableColumns();
-  return (
-    <AIFileContextProvider searchResultItems={items}>
-      <section className={styles.dashboardTable}>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              {columns.map(column => (
-                <TableHeaderCell key={column.columnKey} className={column.className}>{column.label}</TableHeaderCell>
-              ))}
-              <TableHeaderCell className={styles.operationColumnHeader} />
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {items.map((item, index) => (
-              createTableRow({ index, columns, item })
-            ))}
-          </TableBody>
-        </Table>
 
-        <AIFileDetails
-          isOpen={selectedItem !== undefined}
-          onDismiss={() => { setSelectedItem(undefined); }}
-        />
-      </section>
-    </AIFileContextProvider>
+  return (
+    <section className={styles.dashboardTable}>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            {columns.map(column => (
+              <TableHeaderCell key={column.columnKey} className={column.className}>{column.label}</TableHeaderCell>
+            ))}
+            <TableHeaderCell className={styles.operationColumnHeader} />
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {items.map((item, index) => (
+            createTableRow({ index, columns, item })
+          ))}
+        </TableBody>
+      </Table>
+
+      <AIFileDetails
+        isOpen={selectedAiFile !== undefined}
+        onDismiss={() => { setSelectedAiFile(undefined); }}
+      />
+    </section>
   );
 };
 

@@ -6,7 +6,7 @@ import type { IDashboardProps } from './IDashboardProps';
 import DashboardTable from '../../../components/DashboardTable/DashboardTable';
 import AIFileObject from '../../../models/AIFileObject';
 import SkeletonTable from '../../../components/SkeletonTable/SkeletonTable';
-import { AIFileContextProvider } from '../../../context/AIFileContext';
+import { AIFilesContextProvider } from '../../../context/AIFilesContext';
 
 const Dashboard: React.FC<IDashboardProps> = (props) => {
   // TODO: Load the actual data from the service
@@ -44,11 +44,11 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
   }, []);
 
   return (
-    <section className={styles.dashboard}>
-      <AIFileContextProvider searchResultItems={items}>
+    <AIFilesContextProvider searchResults={mockItems}>
+      <section className={styles.dashboard}>
         <h1>{strings.Title}</h1>
         {isLoading && <SkeletonTable />}
-        
+
         {!isLoading && items.length === 0 && (
           <DashboardTable
             items={[{
@@ -62,8 +62,8 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
         {!isLoading && items.length > 0 && (
           <DashboardTable items={items} />
         )}
-      </AIFileContextProvider>
-    </section>
+      </section>
+    </AIFilesContextProvider>
   );
 };
 
