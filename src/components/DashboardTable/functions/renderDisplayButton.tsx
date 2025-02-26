@@ -2,24 +2,23 @@ import * as React from "react";
 import { Button } from "@fluentui/react-components";
 import { DocumentRegular } from "@fluentui/react-icons";
 import AIFileObject from "../../../models/AIFileObject";
+import { AIFileContext } from "../../../context/AIFileContext";
 
 export interface IRenderDisplayButtonProps {
-  item: AIFileObject;
+	item: AIFileObject;
 }
 
 const renderDisplayButton: React.FC<IRenderDisplayButtonProps> = (props) => {
 	const { item } = props;
+	const { setSelectedItem } = React.useContext(AIFileContext);
 
-  return (
+	return (
 		<Button
 			icon={<DocumentRegular />}
 			onClick={() => {
-				// TODO: Implement the display button click handler
-				alert("TODO: Implement the display button click handler");
-
-				console.log("item", item);
+                setSelectedItem(item);
 			}}
-			/>
+		/>
 	);
 };
 
