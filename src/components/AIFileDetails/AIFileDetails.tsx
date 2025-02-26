@@ -16,13 +16,8 @@ export const AIFileDetails: React.FC<IAIFileDetailsProps> = (props) => {
         onDismiss();
     }, [setSelectedAiFile, onDismiss]);
 
-    React.useEffect(() => {
-        if (selectedAiFile) {
-            console.log('Selected item in details:', selectedAiFile);
-        }
-    }, [selectedAiFile]);
-
     const selectedFileName = `${selectedAiFile?.Name}.${selectedAiFile?.FileExtension}`;
+
     return (
         <Dialog hidden={!props.isOpen} onDismiss={handleDismiss} styles={{ root: { width: '100%' }, main: { minWidth: '600px' } }}>
             <DialogContent title={selectedFileName} type={DialogType.normal} styles={

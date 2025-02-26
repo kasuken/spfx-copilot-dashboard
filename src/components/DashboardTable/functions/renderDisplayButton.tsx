@@ -17,7 +17,6 @@ const renderDisplayButton: React.FC<IRenderDisplayButtonProps> = (props) => {
 		<Button
 			icon={<DocumentRegular />}
 			onClick={() => {
-				console.log("Displaying item:", item);
 				setSelectedAiFile(item);
 			}}
 		/>
