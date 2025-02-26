@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Dialog, DialogContent } from "@fluentui/react";
-import { AIFileContext } from "../../context/AIFileContext";
+import { Dialog, DialogContent, DialogType } from "@fluentui/react";
+import { AIFilesContext } from "../../context/AIFilesContext";
 
 export type IAIFileDetailsProps = {
     isOpen: boolean;
@@ -8,34 +8,26 @@ export type IAIFileDetailsProps = {
 }
 
 export const AIFileDetails: React.FC<IAIFileDetailsProps> = (props) => {
-    const { isOpen, onDismiss } = props;
-    const { selectedItem, setSelectedItem } = React.useContext(AIFileContext);
+    const { onDismiss } = props;
+    const { selectedAiFile, setSelectedAiFile } = React.useContext(AIFilesContext);
 
     const handleDismiss = React.useCallback(() => {
-        setSelectedItem(undefined);
+        setSelectedAiFile(undefined);
         onDismiss();
-    }, [setSelectedItem, onDismiss]);
+    }, [setSelectedAiFile, onDismiss]);
 
     React.useEffect(() => {
-        if (selectedItem) {
-            console.log('Selected item in details:', selectedItem);
+        if (selectedAiFile) {
+            console.log('Selected item in details:', selectedAiFile);
         }
-    }, [selectedItem]);
-    console.log(selectedItem);
-    return (
-        <Dialog
-            hidden={!isOpen}
-            onDismiss={handleDismiss}
-            modalProps={{
-                isBlocking: false,
-                styles: {
-                    main: { maxWidth: '100vw', width: '100vw', minWidth: '100vw', height: '90vh' },
-                    root: { maxWidth: '100vw !important', width: '100vw !important' },
-                }
-            }}>
+    }, [selectedAiFile]);
 
-            <DialogContent title={selectedItem?.Name}>
-                {selectedItem &&
+    const selectedFileName = `${selectedAiFile?.Name}.${selectedAiFile?.FileExtension}`;
+    return (
+        <Dialog hidden={!props.isOpen} onDismiss={handleDismiss} styles={{ root: { width: '100%' }, main: { minWidth: '600px' } }}>
+            <DialogContent title={selectedFileName} type={DialogType.normal} styles={
+                { content: { width: '100%' } }}>
+                {selectedAiFile &&
                     <iframe
                         src="https://tmaestrinimvp.sharepoint.com/sites/allcompany/_layouts/15/chat.aspx"
                         style={{ width: '100%', height: '75vh', border: 'none' }}

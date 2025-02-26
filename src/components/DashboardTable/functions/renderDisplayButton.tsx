@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button } from "@fluentui/react-components";
 import { DocumentRegular } from "@fluentui/react-icons";
 import AIFileObject from "../../../models/AIFileObject";
-import { AIFileContext } from "../../../context/AIFileContext";
+import { AIFilesContext } from "../../../context/AIFilesContext";
 
 export interface IRenderDisplayButtonProps {
 	item: AIFileObject;
@@ -10,13 +10,15 @@ export interface IRenderDisplayButtonProps {
 
 const renderDisplayButton: React.FC<IRenderDisplayButtonProps> = (props) => {
 	const { item } = props;
-	const { setSelectedItem } = React.useContext(AIFileContext);
+	const { selectedAiFile, setSelectedAiFile } = React.useContext(AIFilesContext);
 
+	console.log(selectedAiFile);
 	return (
 		<Button
 			icon={<DocumentRegular />}
 			onClick={() => {
-                setSelectedItem(item);
+				console.log("Displaying item:", item);
+				setSelectedAiFile(item);
 			}}
 		/>
 	);
