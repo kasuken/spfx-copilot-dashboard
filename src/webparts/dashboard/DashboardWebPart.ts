@@ -20,12 +20,13 @@ export interface IDashboardWebPartProps {
 export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWebPartProps> {
 
   private _userIsAdmin: boolean = false;
-
+  private _spFi : SPFI;
   public render(): void {
     const element: React.ReactElement<IDashboardProps> = React.createElement(
       Dashboard,
       {
-        userIsAdmin: this._userIsAdmin
+        userIsAdmin: this._userIsAdmin,
+        spfI : this._spFi
       }
     );
 
@@ -36,10 +37,10 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
     await super.onInit();
 		
     // Initialize PnPjs with the current context
-    const sp = spfi().using(SPFx(this.context));
+    this._spFi = spfi().using(SPFx(this.context));
     
     // Check if the current user is an admin
-    this._userIsAdmin = await this._checkUserIsAdmin(sp);
+    this._userIsAdmin = await this._checkUserIsAdmin(this._spFi);
   }
 
   private async _checkUserIsAdmin(sp: SPFI): Promise<boolean> {

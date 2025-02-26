@@ -6,6 +6,7 @@ import type { IDashboardProps } from './IDashboardProps';
 import DashboardTable from '../../../components/DashboardTable/DashboardTable';
 import AIFileObject from '../../../models/AIFileObject';
 import SkeletonTable from '../../../components/SkeletonTable/SkeletonTable';
+import { SPOSearchService } from '../../../services/SPOSearchService';
 
 const Dashboard: React.FC<IDashboardProps> = (props) => {
   // TODO: Load the actual data from the service
@@ -41,6 +42,22 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       setIsLoading(false);
     }, 3000);
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const searchService = new SPOSearchService(props.spfI);
+        const results = await searchService.search();
+        
+        setItems(results);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
+  
 
   return (
     <section className={styles.dashboard}>
