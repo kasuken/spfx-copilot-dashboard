@@ -1,0 +1,18 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+$width: 80vw;
+
+.AIFileDetailsDialog {
+  max-width: 100%;
+  width: 100%;
+  max-height: 100%;
+  height: 100vh;
+}
+
+:global {
+  .main-78 {
+    width: $width !important;
+    max-width: $width !important;
+    min-width: $width !important;
+  }
+}

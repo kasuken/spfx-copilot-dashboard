@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Dialog, DialogContent, DialogType } from "@fluentui/react";
 import { AIFilesContext } from "../../context/AIFilesContext";
+import styles from "./AIFileDetails.module.scss";
 
 export type IAIFileDetailsProps = {
     isOpen: boolean;
@@ -19,7 +20,9 @@ export const AIFileDetails: React.FC<IAIFileDetailsProps> = (props) => {
     const selectedFileName = `${selectedAiFile?.Name}.${selectedAiFile?.FileExtension}`;
 
     return (
-        <Dialog hidden={!props.isOpen} onDismiss={handleDismiss} styles={{ root: { width: '100%' }, main: { minWidth: '600px' } }}>
+        <Dialog hidden={!props.isOpen} onDismiss={handleDismiss} 
+        styles={{ root: { width: '100%' }, main: { minWidth: '600px' } }}
+        modalProps={{ isBlocking: true, className: `${styles.AIFileDetailsDialog}` }}>
             <DialogContent title={selectedFileName} type={DialogType.normal} styles={
                 { content: { width: '100%' } }}>
                 {selectedAiFile &&
