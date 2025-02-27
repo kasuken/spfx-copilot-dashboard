@@ -13,19 +13,25 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
   // Define custom mock items for the table
   const mockItems: AIFileObject[] = [
     {
-      Name: 'Item 1',
+      Name: 'Documents agent.copilot',
       FileExtension: 'copilot',
-      FileUrl: 'https://www.bing.com',
+      DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/Shared%20Documents/Documents%20agent.copilot',
+      ParentLink: 'https://tmaestrinimvp.sharepoint.com/Shared Documents/Forms/AllItems.aspx',
+      SPSiteURL: 'https://tmaestrinimvp.sharepoint.com'
     },
     {
-      Name: 'Item 2',
+      Name: 'My holy agent.agent',
       FileExtension: 'agent',
-      FileUrl: 'https://www.bing.com',
+      DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany/Shared%20Documents/My%20holy%20agent.agent',
+      ParentLink: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany/Shared Documents/Forms/AllItems.aspx',
+      SPSiteURL: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany'
     },
     {
-      Name: 'Item 3',
-      FileExtension: 'copilot',
-      FileUrl: 'https://www.bing.com',
+      Name: 'The Bishops Arms.agent',
+      FileExtension: 'agent',
+      DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1/Shared%20Documents/The%20Bishops%20Arms.agent',
+      ParentLink: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1/Shared Documents/Forms/AllItems.aspx',
+      SPSiteURL: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1'
     }
   ];
 
@@ -54,7 +60,9 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
             items={[{
               Name: strings.Messages.NoCopilotFound,
               FileExtension: undefined!,
-              FileUrl: undefined!
+              DefaultEncodingUrl: undefined!,
+              ParentLink: undefined!,
+              SPSiteURL: undefined!
             }]}
           />
         )}
