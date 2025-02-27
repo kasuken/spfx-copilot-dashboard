@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Dialog, DialogContent, DialogType } from "@fluentui/react";
+import { Dialog, DialogContent, DialogType, MessageBar, MessageBarType } from "@fluentui/react";
 import { AIFilesContext } from "../../context/AIFilesContext";
-import styles from "./AIFileDetails.module.scss";
+import styles from "./AIFileDetailsViewer.module.scss";
 import { buildFileUrl } from "./functions/buildFileUrl";
 
 
@@ -28,7 +28,9 @@ export const AIFileDetailsViewer: React.FC<IAIFileDetailsProps> = (props) => {
             modalProps={{ isBlocking: true, className: `${styles.AIFileDetailsDialog}` }}>
             <DialogContent title={selectedFileName} type={DialogType.normal} styles={
                 { content: { width: '100%' } }}>
-                Close the fileviewer to get immediately to the source of your {selectedAiFile?.FileExtension}
+                <MessageBar messageBarType={MessageBarType.info}>
+                    Close the file viewer to get immediately to the source of your {selectedAiFile?.FileExtension}.
+                </MessageBar>
                 {selectedAiFile &&
                     <iframe
                         name="aiFileViewer"
