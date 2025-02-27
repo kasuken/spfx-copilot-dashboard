@@ -11,6 +11,9 @@ import {
 import getTableColumns from './functions/getTableColumns';
 import createTableRow from './functions/createTableRow';
 import AIFileObject from '../../models/AIFileObject';
+import { AIFilesContext } from '../../context/AIFilesContext';
+import { AIFileDetailsViewer } from '../AIFileDetailsViewer/AIFileDetailsViewer';
+
 
 export interface IDashboardTableProps {
   items: AIFileObject[];
@@ -19,7 +22,7 @@ export interface IDashboardTableProps {
 
 const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
   const { items } = props;
-
+  const { selectedAiFile, setSelectedAiFile } = React.useContext(AIFilesContext);
   const columns = getTableColumns();
 
   return (
@@ -39,6 +42,11 @@ const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
           ))}
         </TableBody>
       </Table>
+
+      <AIFileDetailsViewer
+        isOpen={selectedAiFile !== undefined}
+        onDismiss={() => { setSelectedAiFile(undefined); }}
+      />
     </section>
   );
 };
