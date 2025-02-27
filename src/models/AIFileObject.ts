@@ -5,3 +5,7 @@ export default class AIFileObject {
   ParentLink: string;
   SPSiteURL: string;
 }
+
+export type AIFileObjects = {
+  value: AIFileObject[];
+}

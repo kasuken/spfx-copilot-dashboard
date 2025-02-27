@@ -43,9 +43,10 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
     // Load the data from the service
     setItems(mockItems);
 
-    // TODO: Remove the following, it's only for demonstration purposes using mock data
+    // TODO: Remove the following, it's only for demonstration purposes using mock data; remember to propagate the actual search results!
     setTimeout(() => {
       setIsLoading(false);
+      props.onSearchResults({value: mockItems});
     }, 100);
   }, []);
 
