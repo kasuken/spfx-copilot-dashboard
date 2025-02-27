@@ -16,16 +16,28 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       Name: 'Item 1',
       FileExtension: 'copilot',
       FileUrl: 'https://www.bing.com',
+      DefaultEncodingUrl: 'https://www.bing.com',
+      ParentLink: 'https://www.bing.com',
+      SPSiteURL: 'https://www.bing.com',
+      CopilotAgentUrl: 'https://www.bing.com'
     },
     {
       Name: 'Item 2',
       FileExtension: 'agent',
       FileUrl: 'https://www.bing.com',
+      DefaultEncodingUrl: 'https://www.bing.com',
+      ParentLink: 'https://www.bing.com',
+      SPSiteURL: 'https://www.bing.com',
+      CopilotAgentUrl: 'https://www'
     },
     {
       Name: 'Item 3',
       FileExtension: 'copilot',
       FileUrl: 'https://www.bing.com',
+      DefaultEncodingUrl: 'https://www.bing.com',
+      ParentLink: 'https://www.bing.com',
+      SPSiteURL: 'https://www.bing.com',
+      CopilotAgentUrl: 'https://www.bing.com'
     }
   ];
 
@@ -48,7 +60,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       try {
         const searchService = new SPOSearchService(props.spfI);
         const results = await searchService.search();
-        
+        console.log(results);
         setItems(results);
       } catch (error) {
         console.error("Error fetching search results:", error);
@@ -73,7 +85,11 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
           items: [{
             Name: strings.Messages.NoCopilotFound,
             FileExtension: undefined!,
-            FileUrl: undefined!
+            FileUrl: undefined!,
+            DefaultEncodingUrl: undefined!,
+            ParentLink: undefined!,
+            SPSiteURL: undefined!,
+            CopilotAgentUrl: undefined!
           }]
         })}
 

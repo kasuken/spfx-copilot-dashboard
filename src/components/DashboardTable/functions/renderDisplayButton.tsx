@@ -18,6 +18,8 @@ const renderDisplayButton: React.FC<IRenderDisplayButtonProps> = (props) => {
 				alert("TODO: Implement the display button click handler");
 
 				console.log("item", item);
+				//Opens the Copilot Agent URL in a new tab
+				window.open(item.CopilotAgentUrl, "_blank");
 			}}
 			/>
 	);
