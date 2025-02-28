@@ -6,6 +6,7 @@ import type { IDashboardProps } from './IDashboardProps';
 import DashboardTable from '../../../components/DashboardTable/DashboardTable';
 import AIFileObject from '../../../models/AIFileObject';
 import SkeletonTable from '../../../components/SkeletonTable/SkeletonTable';
+import { AIFilesContextProvider } from '../../../context/AIFilesContext';
 import { SPOSearchService } from '../../../services/SPOSearchService';
 
 const Dashboard: React.FC<IDashboardProps> = (props) => {
@@ -13,30 +14,27 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
   // Define custom mock items for the table
   const mockItems: AIFileObject[] = [
     {
-      Name: 'Item 1',
+      Name: 'Documents agent.copilot',
       FileExtension: 'copilot',
-      FileUrl: 'https://www.bing.com',
-      DefaultEncodingUrl: 'https://www.bing.com',
-      ParentLink: 'https://www.bing.com',
-      SPSiteURL: 'https://www.bing.com',
+      DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/Shared%20Documents/Documents%20agent.copilot',
+      ParentLink: 'https://tmaestrinimvp.sharepoint.com/Shared Documents/Forms/AllItems.aspx',
+      SPSiteURL: 'https://tmaestrinimvp.sharepoint.com',
       CopilotAgentUrl: 'https://www.bing.com'
     },
     {
-      Name: 'Item 2',
+      Name: 'My holy agent.agent',
       FileExtension: 'agent',
-      FileUrl: 'https://www.bing.com',
-      DefaultEncodingUrl: 'https://www.bing.com',
-      ParentLink: 'https://www.bing.com',
-      SPSiteURL: 'https://www.bing.com',
+      DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany/Shared%20Documents/My%20holy%20agent.agent',
+      ParentLink: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany/Shared Documents/Forms/AllItems.aspx',
+      SPSiteURL: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany',
       CopilotAgentUrl: 'https://www'
     },
     {
-      Name: 'Item 3',
-      FileExtension: 'copilot',
-      FileUrl: 'https://www.bing.com',
-      DefaultEncodingUrl: 'https://www.bing.com',
-      ParentLink: 'https://www.bing.com',
-      SPSiteURL: 'https://www.bing.com',
+      Name: 'The Bishops Arms.agent',
+      FileExtension: 'agent',
+      DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1/Shared%20Documents/The%20Bishops%20Arms.agent',
+      ParentLink: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1/Shared Documents/Forms/AllItems.aspx',
+      SPSiteURL: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1',
       CopilotAgentUrl: 'https://www.bing.com'
     }
   ];
@@ -49,10 +47,11 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
     // Load the data from the service
     setItems(mockItems);
 
-    // TODO: Remove the following, it's only for demonstration purposes using mock data
+    // TODO: Remove the following, it's only for demonstration purposes using mock data; remember to propagate the actual search results!
     setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+      props.onSearchResults({value: mockItems});
+    }, 100);
   }, []);
 
   useEffect(() => {
@@ -72,34 +71,29 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
   
 
   return (
-    <section className={styles.dashboard}>
-      <h1>{strings.Title}</h1>
-      {/* Show the skeleton table while loading data */}
-      {isLoading && 
-        <SkeletonTable />}
+    <AIFilesContextProvider searchResults={mockItems}>
+      <section className={styles.dashboard}>
+        <h1>{strings.Title}</h1>
+        {isLoading && <SkeletonTable />}
 
-      {/* Show the table when data is loaded and there are no items available */}
-      {!isLoading && 
-        items.length === 0 && 
-        DashboardTable({
-          items: [{
-            Name: strings.Messages.NoCopilotFound,
-            FileExtension: undefined!,
-            FileUrl: undefined!,
-            DefaultEncodingUrl: undefined!,
-            ParentLink: undefined!,
-            SPSiteURL: undefined!,
-            CopilotAgentUrl: undefined!
-          }]
-        })}
+        {!isLoading && items.length === 0 && (
+          <DashboardTable
+            items={[{
+              Name: strings.Messages.NoCopilotFound,
+              FileExtension: undefined!,
+              DefaultEncodingUrl: undefined!,
+              ParentLink: undefined!,
+              SPSiteURL: undefined!,
+              CopilotAgentUrl: undefined!
+            }]}
+          />
+        )}
 
-      {/* Show the table when data is loaded and there are items available */}
-      {!isLoading && 
-        items.length > 0 && 
-        DashboardTable({
-          items: items
-        })}
-    </section>
+        {!isLoading && items.length > 0 && (
+          <DashboardTable items={items} />
+        )}
+      </section>
+    </AIFilesContextProvider>
   );
 };
 
