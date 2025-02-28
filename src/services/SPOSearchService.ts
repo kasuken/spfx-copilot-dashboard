@@ -32,30 +32,15 @@ export class SPOSearchService {
             DefaultEncodingURL: string;
             ParentLink: string;
             SPSiteURL: string;
-            CopilotAgentUrl: string;
         }) => {
 
-            //Format the URL to open the copilot agent
-            //https://tmaestrinimvp.sharepoint.com/sites/allcompany/Shared Documents/Forms/AllItems.aspx?id=/sites/allcompany/Shared Documents/My holy agent.agent&parent=/sites/allcompany/Shared Documents
-            const parts = result.DefaultEncodingURL.split("/sites");
-            const defaultEncodingUrl = parts.length > 1 ? "/sites" + parts[1] : result.DefaultEncodingURL;
-
-            const parentPathparts = result.ParentLink.split("/sites");
-            const parentPath = parentPathparts.length > 1 ? "/sites" + parentPathparts[1].split("/Forms")[0] : result.ParentLink;
-
-
-    
-            // Construct the final URL
-            const formattedUrl = `${result.ParentLink}?id=${defaultEncodingUrl}&parent=${parentPath}`;
-    
             return {
                 Name: result.Title,
                 FileExtension: result.FileExtension as 'copilot' | 'agent',
                 FileUrl: result.Path,
                 DefaultEncodingUrl: result.DefaultEncodingURL,
                 ParentLink: result.ParentLink,
-                SPSiteURL: result.SPSiteURL,
-                CopilotAgentUrl: formattedUrl 
+                SPSiteURL: result.SPSiteURL
             };
         });
     }

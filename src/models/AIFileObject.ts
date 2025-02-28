@@ -4,7 +4,6 @@ export default class AIFileObject {
   DefaultEncodingUrl: string;
   ParentLink: string;
   SPSiteURL: string;
-  CopilotAgentUrl: string;
 }
 
 export type AIFileObjects = {

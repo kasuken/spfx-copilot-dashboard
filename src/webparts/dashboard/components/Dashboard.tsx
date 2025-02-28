@@ -19,7 +19,6 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/Shared%20Documents/Documents%20agent.copilot',
       ParentLink: 'https://tmaestrinimvp.sharepoint.com/Shared Documents/Forms/AllItems.aspx',
       SPSiteURL: 'https://tmaestrinimvp.sharepoint.com',
-      CopilotAgentUrl: 'https://www.bing.com'
     },
     {
       Name: 'My holy agent.agent',
@@ -27,7 +26,6 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany/Shared%20Documents/My%20holy%20agent.agent',
       ParentLink: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany/Shared Documents/Forms/AllItems.aspx',
       SPSiteURL: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany',
-      CopilotAgentUrl: 'https://www'
     },
     {
       Name: 'The Bishops Arms.agent',
@@ -35,7 +33,6 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1/Shared%20Documents/The%20Bishops%20Arms.agent',
       ParentLink: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1/Shared Documents/Forms/AllItems.aspx',
       SPSiteURL: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1',
-      CopilotAgentUrl: 'https://www.bing.com'
     }
   ];
 
@@ -84,7 +81,6 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
               DefaultEncodingUrl: undefined!,
               ParentLink: undefined!,
               SPSiteURL: undefined!,
-              CopilotAgentUrl: undefined!
             }]}
           />
         )}
