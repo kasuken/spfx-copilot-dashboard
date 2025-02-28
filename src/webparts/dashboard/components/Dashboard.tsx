@@ -71,7 +71,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
   
 
   return (
-    <AIFilesContextProvider searchResults={mockItems}>
+    <AIFilesContextProvider searchResults={!isLoading && items.length === 0 ? items : mockItems}>
       <section className={styles.dashboard}>
         <h1>{strings.Title}</h1>
         {isLoading && <SkeletonTable />}
