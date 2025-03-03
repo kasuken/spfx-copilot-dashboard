@@ -7,51 +7,33 @@ import DashboardTable from '../../../components/DashboardTable/DashboardTable';
 import AIFileObject from '../../../models/AIFileObject';
 import SkeletonTable from '../../../components/SkeletonTable/SkeletonTable';
 import { AIFilesContextProvider } from '../../../context/AIFilesContext';
+import { SPOSearchService } from '../../../services/SPOSearchService';
 
 const Dashboard: React.FC<IDashboardProps> = (props) => {
-  // TODO: Load the actual data from the service
-  // Define custom mock items for the table
-  const mockItems: AIFileObject[] = [
-    {
-      Name: 'Documents agent.copilot',
-      FileExtension: 'copilot',
-      DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/Shared%20Documents/Documents%20agent.copilot',
-      ParentLink: 'https://tmaestrinimvp.sharepoint.com/Shared Documents/Forms/AllItems.aspx',
-      SPSiteURL: 'https://tmaestrinimvp.sharepoint.com'
-    },
-    {
-      Name: 'My holy agent.agent',
-      FileExtension: 'agent',
-      DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany/Shared%20Documents/My%20holy%20agent.agent',
-      ParentLink: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany/Shared Documents/Forms/AllItems.aspx',
-      SPSiteURL: 'https://tmaestrinimvp.sharepoint.com/sites/allcompany'
-    },
-    {
-      Name: 'The Bishops Arms.agent',
-      FileExtension: 'agent',
-      DefaultEncodingUrl: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1/Shared%20Documents/The%20Bishops%20Arms.agent',
-      ParentLink: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1/Shared Documents/Forms/AllItems.aspx',
-      SPSiteURL: 'https://tmaestrinimvp.sharepoint.com/sites/DemoTeam1'
-    }
-  ];
-
   // Declare state variables
   const [items, setItems] = React.useState<AIFileObject[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   useEffect(() => {
-    // Load the data from the service
-    setItems(mockItems);
-
-    // TODO: Remove the following, it's only for demonstration purposes using mock data; remember to propagate the actual search results!
-    setTimeout(() => {
-      setIsLoading(false);
-      props.onSearchResults({value: mockItems});
-    }, 100);
+    (async () => {
+      try {
+        // Create a search service instance
+        const searchService = new SPOSearchService(props.spfI);
+        // Call the search method
+        const results = await searchService.search();
+        // Set the items state variable
+        setItems(results);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   }, []);
+  
 
   return (
-    <AIFilesContextProvider searchResults={mockItems}>
+    <AIFilesContextProvider searchResults={!isLoading && items.length === 0 ? items : []}>
       <section className={styles.dashboard}>
         <h1>{strings.Title}</h1>
         {isLoading && <SkeletonTable />}
@@ -63,7 +45,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
               FileExtension: undefined!,
               DefaultEncodingUrl: undefined!,
               ParentLink: undefined!,
-              SPSiteURL: undefined!
+              SPSiteURL: undefined!,
             }]}
           />
         )}
