@@ -47,7 +47,7 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
 
     // Initialize PnPjs with the current context
     this._spFi = spfi().using(SPFx(this.context));
-console.log(this.context);
+
     // Check if the current user is an admin
     this._userIsAdmin = await this._checkUserIsAdmin(this._spFi);
   }
