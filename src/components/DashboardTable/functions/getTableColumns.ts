@@ -1,5 +1,4 @@
 import * as strings from "DashboardTableStrings";
-//import styles from "../DashboardTable.module.scss";
 import AIFileObject from "../../../models/AIFileObject";
 import { IColumn } from "@fluentui/react";
 import getPropertyName from "../../../utilities/getPropertyName";

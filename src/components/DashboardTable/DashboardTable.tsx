@@ -1,9 +1,7 @@
 import * as React from 'react';
-//import * as strings from 'DashboardTableStrings';
 import styles from './DashboardTable.module.scss';
 
 import { DetailsListLayoutMode, SelectionMode, ShimmeredDetailsList } from '@fluentui/react';
-//import createTableRow from './functions/createTableRow';
 import AIFileObject from '../../models/AIFileObject';
 import { AIFilesContext } from '../../context/AIFilesContext';
 import { AIFileDetailsViewer } from '../AIFileDetailsViewer/AIFileDetailsViewer';
