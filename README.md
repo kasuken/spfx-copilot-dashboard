@@ -28,44 +28,11 @@ This project is valid for the [SharePoint Hackathon](https://adoption.microsoft.
 
 ---
 
-## 🏗️ Architecture
-The solution is developed using the **SharePoint Framework (SPFx)** and integrates with **SharePoint Online AI Agent APIs**. Below is a high-level architecture diagram:
-
-```
-+-------------------------+
-| SharePoint Online       |
-|  - SPO Agent Dashboard  |
-|  - Deployed AI Agents   |
-+-------------------------+
-        |
-        v
-+-------------------------+
-| SPFx Web Part          |
-|  - React UI            |
-|  - API Integration     |
-|  - Popup Modal         |
-+-------------------------+
-        |
-        v
-+-------------------------+
-| SPO Agent APIs         |
-|  - Fetch agent list    |
-|  - Get agent details   |
-|  - Trigger agent       |
-+-------------------------+
-```
-
----
-
 ## 🛠️ Installation & Setup
 ### Prerequisites
 Ensure you have the following tools installed:
 
 - Node.js (LTS version)
-- Yeoman & SPFx Generator  
-  ```bash
-  npm install -g yo @microsoft/generator-sharepoint
-  ```
 - Gulp  
   ```bash
   npm install -g gulp
@@ -73,8 +40,8 @@ Ensure you have the following tools installed:
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/your-org/spo-agent-dashboard.git
-cd spo-agent-dashboard
+git clone https://github.com/your-org/spfx-copilot-dashboard.git
+cd spfx-copilot-dashboard
 ```
 
 ### Install Dependencies
