@@ -27,7 +27,7 @@ export class SPOSearchService {
     
         return searchResults.PrimarySearchResults.map((result: { 
             Title: string; 
-            FileExtension: string; 
+            SecondaryFileExtension: string; 
             Path: string;
             DefaultEncodingURL: string;
             ParentLink: string;
@@ -36,7 +36,7 @@ export class SPOSearchService {
 
             return {
                 Name: result.Title,
-                FileExtension: result.FileExtension as 'copilot' | 'agent',
+                FileExtension: result.SecondaryFileExtension as 'copilot' | 'agent',
                 FileUrl: result.Path,
                 DefaultEncodingUrl: result.DefaultEncodingURL,
                 ParentLink: result.ParentLink,
