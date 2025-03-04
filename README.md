@@ -49,6 +49,9 @@ cd spfx-copilot-dashboard
 npm install
 ```
 
+> [!IMPORTANT]
+> Since the current used version of SPFx is a pre-release version, you need to perform a workaround to use `fast-serve`. A small guide can be found here: [Fast-Serve with SPFx pre-release version](SPFx%20fast%20serve%20with%20pre-release%20version.md).
+
 ### Build the Solution
 ```bash
 gulp build
@@ -58,6 +61,13 @@ gulp build
 ```bash
 gulp serve
 ```
+
+If you prefer using fast-serve, you can run the following command:
+
+```bash
+npm run serve
+```
+
 > Open **https://your-sharepoint-site/_layouts/15/workbench.aspx** to test locally.
 
 ### Deploy to SharePoint
@@ -81,7 +91,7 @@ gulp serve
 
 ## 🔧 Technologies Used
 
-![version](https://img.shields.io/badge/version-1.20.0-green.svg)
+![version](https://img.shields.io/badge/version-1.21.0_preview-green.svg)
 
 - **SharePoint Framework (SPFx)**
 - **React**
