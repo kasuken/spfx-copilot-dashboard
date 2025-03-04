@@ -11,6 +11,14 @@ This dashboard simplifies AI-powered task execution by offering a **centralized 
 
 ---
 
+## 👩‍💻 SharePoint Hackathon
+
+This project is valid for the [SharePoint Hackathon](https://adoption.microsoft.com/en-us/sharepoint/hackathon/) open from 3rd March to 17th March 2025.
+
+![image](https://github.com/user-attachments/assets/c3a765a4-4410-4699-9a74-ef57e42c9bfb)
+
+---
+
 ## 🎯 Features
 ✅ **SPFx-based web part** for easy deployment in SharePoint Online  
 ✅ **Dynamic agent discovery** across the tenant  
