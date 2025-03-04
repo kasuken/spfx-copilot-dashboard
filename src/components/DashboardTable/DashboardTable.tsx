@@ -1,47 +1,36 @@
 import * as React from 'react';
+//import * as strings from 'DashboardTableStrings';
 import styles from './DashboardTable.module.scss';
 
-import {
-  TableBody,
-  TableRow,
-  Table,
-  TableHeader,
-  TableHeaderCell
-} from "@fluentui/react-components";
-import getTableColumns from './functions/getTableColumns';
-import createTableRow from './functions/createTableRow';
+import { DetailsListLayoutMode, SelectionMode, ShimmeredDetailsList } from '@fluentui/react';
+//import createTableRow from './functions/createTableRow';
 import AIFileObject from '../../models/AIFileObject';
 import { AIFilesContext } from '../../context/AIFilesContext';
 import { AIFileDetailsViewer } from '../AIFileDetailsViewer/AIFileDetailsViewer';
-
+import getTableColumns from './functions/getTableColumns';
 
 export interface IDashboardTableProps {
-  items: AIFileObject[];
+  items?: AIFileObject[];
   disabled?: boolean;
 }
 
 const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
+
   const { items } = props;
   const { selectedAiFile, setSelectedAiFile } = React.useContext(AIFilesContext);
   const columns = getTableColumns();
 
   return (
     <section className={styles.dashboardTable}>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            {columns.map(column => (
-              <TableHeaderCell key={column.columnKey} className={column.className}>{column.label}</TableHeaderCell>
-            ))}
-            <TableHeaderCell className={styles.operationColumnHeader} />
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {items.map((item, index) => (
-            createTableRow({ index, columns, item })
-          ))}
-        </TableBody>
-      </Table>
+      <ShimmeredDetailsList
+        items={items || []}
+        columns={columns}
+        setKey="set"
+        enableShimmer={!items}
+        layoutMode={DetailsListLayoutMode.justified}
+        selectionMode={SelectionMode.none}
+        selectionPreservedOnEmptyClick={true}
+      />
 
       <AIFileDetailsViewer
         isOpen={selectedAiFile !== undefined}

@@ -1,5 +1,6 @@
 declare interface IDashboardTableStrings {
 	Title: string;
+	FilterLabel: string;
 	Operations: {
 		View: string;
 	};
