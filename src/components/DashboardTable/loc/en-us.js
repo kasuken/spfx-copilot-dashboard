@@ -1,7 +1,7 @@
 define([], function() {
   return {
     Title: "Copilot Dashboard",
-    FilterLabel: "What are you searching for?",
+    FilterLabel: "Filter content",
     Operations: {
       View: "View",
     },
