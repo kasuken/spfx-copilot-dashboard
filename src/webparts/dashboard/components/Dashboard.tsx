@@ -5,7 +5,6 @@ import * as strings from 'DashboardWebPartStrings';
 import type { IDashboardProps } from './IDashboardProps';
 import DashboardTable from '../../../components/DashboardTable/DashboardTable';
 import AIFileObject from '../../../models/AIFileObject';
-import SkeletonTable from '../../../components/SkeletonTable/SkeletonTable';
 import { AIFilesContextProvider } from '../../../context/AIFilesContext';
 import { SPOSearchService } from '../../../services/SPOSearchService';
 
@@ -36,7 +35,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
     <AIFilesContextProvider searchResults={!isLoading && items.length === 0 ? items : []}>
       <section className={styles.dashboard}>
         <h1>{strings.Title}</h1>
-        {isLoading && <SkeletonTable />}
+        {isLoading && <DashboardTable items={undefined!} />}
 
         {!isLoading && items.length === 0 && (
           <DashboardTable
