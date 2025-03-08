@@ -11,8 +11,7 @@ export const filterItems = (
 	filterBy: ItemType
 ): AIFileObject[] => {
 	let filterByValue: string;
-	console.log(items);
-	console.log(filterBy);
+	
 	switch (filterBy) {
 		case ItemType.Copilots:
 			filterByValue = "copilot";
