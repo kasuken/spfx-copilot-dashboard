@@ -1,6 +1,9 @@
 declare interface IDashboardTableStrings {
 	Title: string;
 	FilterLabel: string;
+	AllTabTitle: string;
+	CopilotsTabTitle: string;
+	AgentsTabTitle: string;
 	Operations: {
 		View: string;
 	};
