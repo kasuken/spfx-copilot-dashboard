@@ -4,13 +4,6 @@ import { IColumn } from "@fluentui/react";
 import getPropertyName from "../../../utilities/getPropertyName";
 import renderDisplayButton from "./renderDisplayButton";
 
-export interface IDashboardColumn {
-	columnKey: keyof AIFileObject;
-	label: string;
-	className?: string;
-	formatValue?: (value: unknown) => JSX.Element;
-}
-
 const getTableColumns = (): IColumn[] => {
 	return [
 		{
