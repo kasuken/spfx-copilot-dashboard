@@ -18,13 +18,13 @@ export class SPOSearchService {
                 'ListID', 'contentclass', 'IsDocument', 'IsContainer', 'FileExtension', 'SecondaryFileExtension', 
                 'OriginalPath', 'DefaultEncodingURL', 'ServerRedirectedURL', 'ServerRedirectedPreviewURL', 
                 'LastModifiedTime', 'SharedWithUsersOWSUser', 'HitHighlightedSummary', 'ModifierDates', 
-                'LastModifiedTimeForRetention'
+                'LastModifiedTimeForRetention', 'CreatedBy'
             ],
             Querytext: `SecondaryFileExtension:('agent' OR 'copilot')`
         };
     
         const searchResults = await this._spFi.search(query);
-    
+
         return searchResults.PrimarySearchResults.map((result: { 
             Title: string; 
             SecondaryFileExtension: string; 
@@ -32,6 +32,8 @@ export class SPOSearchService {
             DefaultEncodingURL: string;
             ParentLink: string;
             SPSiteURL: string;
+            CreatedBy: string;
+            authorowsuser: string;
         }) => {
 
             return {
@@ -40,7 +42,9 @@ export class SPOSearchService {
                 FileUrl: result.Path,
                 DefaultEncodingUrl: result.DefaultEncodingURL,
                 ParentLink: result.ParentLink,
-                SPSiteURL: result.SPSiteURL
+                SPSiteURL: result.SPSiteURL,
+                CreatedBy: result.CreatedBy,
+                AuthorOWSUser: result.authorowsuser
             };
         });
     }

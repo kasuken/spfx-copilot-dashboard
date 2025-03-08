@@ -13,8 +13,9 @@
   },
   "externals": {},
   "localizedResources": {
-    "DashboardWebPartStrings": "lib/webparts/dashboard/loc/{locale}.js",
-    "DashboardTableStrings": "lib/components/DashboardTable/loc/{locale}.js",
-    "AIFileDetailsViewerStrings": "lib/components/AIFileDetailsViewer/loc/{locale}.js"
-  }
+		"DashboardWebPartStrings": "lib/webparts/dashboard/loc/{locale}.js",
+		"DashboardTableStrings": "lib/components/DashboardTable/loc/{locale}.js",
+		"DashboardToolbarStrings": "lib/components/DashboardToolbar/loc/{locale}.js",
+		"AIFileDetailsViewerStrings": "lib/components/AIFileDetailsViewer/loc/{locale}.js"
+	}
 }

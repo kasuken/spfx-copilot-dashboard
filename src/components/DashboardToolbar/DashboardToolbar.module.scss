@@ -1,0 +1,8 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.dashboardToolbar {
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  background-color: "[theme:bodyBackground, default: #ffffff]";
+  background-color: var(--bodyBackground);
+}
