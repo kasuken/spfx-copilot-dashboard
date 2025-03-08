@@ -1,6 +1,6 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
-$width: 80vw;
+$width: 60vw;
 
 .AIFileDetailsDialog {
   max-width: 100%;
@@ -10,7 +10,7 @@ $width: 80vw;
 }
 
 :global {
-  .main-78 {
+  .ms-Dialog-main {
     width: $width !important;
     max-width: $width !important;
     min-width: $width !important;
