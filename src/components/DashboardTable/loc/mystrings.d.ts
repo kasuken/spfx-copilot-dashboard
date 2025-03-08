@@ -8,8 +8,14 @@ declare interface IDashboardTableStrings {
 		View: string;
 	};
 	AIFileObject: {
-    Name: string;
-  };
+		FileExtension: string;
+		Name: string;
+		CreatedBy: string;
+		ParentLink: string;
+	};
+	Messages: {
+		NoFileFound: string;
+	};
 }
 
 declare module "DashboardTableStrings" {

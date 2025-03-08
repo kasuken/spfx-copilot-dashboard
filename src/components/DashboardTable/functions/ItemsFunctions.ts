@@ -8,10 +8,18 @@ export enum ItemType {
 
 export const filterItems = (
 	items: AIFileObject[],
-	filterBy: ItemType
+	filterBy: ItemType,
+	showAllFiles: boolean,
+	loginName?: string
 ): AIFileObject[] => {
 	let filterByValue: string;
-	
+
+	if (showAllFiles !== undefined && loginName && loginName.length > 0) {
+		items = items.filter((item) => {
+			return showAllFiles ? true : item.AuthorOWSUser.indexOf(loginName) >= 0;
+		});
+	}
+
 	switch (filterBy) {
 		case ItemType.Copilots:
 			filterByValue = "copilot";
@@ -26,4 +34,16 @@ export const filterItems = (
 	return items.filter((item) => {
 		return item.FileExtension === filterByValue;
 	});
-};
+}
+
+export const getEmptyItem = (): AIFileObject => {
+	return {
+		Name: "",
+		FileExtension: "agent",
+		DefaultEncodingUrl: undefined!,
+		ParentLink: undefined!,
+		SPSiteURL: undefined!,
+		CreatedBy: undefined!,
+		AuthorOWSUser: undefined!,
+	};
+}
