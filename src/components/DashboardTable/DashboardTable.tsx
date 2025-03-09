@@ -9,28 +9,25 @@ import { AIFileDetailsViewer } from '../AIFileDetailsViewer/AIFileDetailsViewer'
 import getTableColumns from './functions/getTableColumns';
 import { filterItems, ItemType } from './functions/ItemsFunctions';
 import DashboardToolbar from '../DashboardToolbar/DashboardToolbar';
-import { WebPartContext } from '@microsoft/sp-webpart-base';
 
 export interface IDashboardTableProps {
   items?: AIFileObject[];
   disabled?: boolean;
-  context?: WebPartContext;
+  userLoginName?: string;
 }
 
 const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
 
-  const { items, context } = props;
+  const { items, userLoginName } = props;
   const { selectedAiFile, setSelectedAiFile } = React.useContext(AIFilesContext);
   const [ showAllFiles, setShowAllFiles ] = React.useState(true);
   const columns = getTableColumns();
 
-  const userLoginName = context?.pageContext?.user?.loginName;
+  const filteredItems = React.useCallback((itemType: ItemType) => {
+    const filtered = filterItems(items || [], itemType, showAllFiles, userLoginName);
 
-  const getDashboardTable = (columns: IColumn[], items: AIFileObject[] | undefined, itemType: ItemType) => {
-    const filteredItems = filterItems(items || [], itemType, showAllFiles, userLoginName);
-
-    if (filteredItems.length === 0) {
-      filteredItems.push({
+    if (filtered.length === 0) {
+      filtered.push({
         Name: strings.Messages.NoFileFound,
         FileExtension: undefined!,
         DefaultEncodingUrl: undefined!,
@@ -40,9 +37,12 @@ const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
         AuthorOWSUser: undefined!,
       });
     }
+    return filtered;
+  }, [showAllFiles]);
 
+  const renderDashboardTable = (columns: IColumn[], items: AIFileObject[]) => {
     return <ShimmeredDetailsList
-      items={filteredItems}
+      items={items}
       columns={columns}
       setKey="set"
       enableShimmer={!items}
@@ -63,13 +63,13 @@ const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
 
       <Pivot>
         <PivotItem headerText={strings.AllTabTitle}>
-          {getDashboardTable(columns, items, ItemType.All)}
+          {renderDashboardTable(columns, filteredItems(ItemType.All))}
         </PivotItem>
         <PivotItem headerText={strings.CopilotsTabTitle}>
-          {getDashboardTable(columns, items, ItemType.Copilots)}
+          {renderDashboardTable(columns, filteredItems(ItemType.Copilots))}
         </PivotItem>
         <PivotItem headerText={strings.AgentsTabTitle}>
-          {getDashboardTable(columns, items, ItemType.Agents)}
+          {renderDashboardTable(columns, filteredItems(ItemType.Agents))}
         </PivotItem>      
       </Pivot>
 

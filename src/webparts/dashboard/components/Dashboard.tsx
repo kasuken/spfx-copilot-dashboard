@@ -40,7 +40,9 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
         {isLoading && <DashboardTable items={undefined!} />}
 
         {!isLoading && items.length > 0 && (
-          <DashboardTable items={items} context={context} />
+          <DashboardTable
+            items={items}
+            userLoginName={context.pageContext.user.loginName} />
         )}
       </section>
     </AIFilesContextProvider>

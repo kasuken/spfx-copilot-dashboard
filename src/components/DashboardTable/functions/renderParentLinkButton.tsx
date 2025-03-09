@@ -18,7 +18,7 @@ const renderParentLinkButton: React.FC<IRenderParentLinkButtonProps> = (props) =
 		<Button
 			icon={<FolderRegular />}
 			onClick={() => {
-				window.open(item.ParentLink, "_blank");
+				window.open(item.ParentLink, "_blank", 'noopener,noreferrer' );
 			}}
 		/>
 	);
