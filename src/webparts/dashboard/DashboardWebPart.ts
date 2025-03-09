@@ -34,7 +34,8 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
       {
         userIsAdmin: this._userIsAdmin,
         onSearchResults: this.aiObjectsSearchResultsRetrieved.bind(this),
-        spfI : this._spFi
+        spfI : this._spFi,
+        context: this.context
       }
     );
 

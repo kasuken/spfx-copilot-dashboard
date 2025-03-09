@@ -4,6 +4,8 @@ export default class AIFileObject {
   DefaultEncodingUrl: string;
   ParentLink: string;
   SPSiteURL: string;
+  CreatedBy: string;
+  AuthorOWSUser: string;
 }
 
 export type AIFileObjects = {
