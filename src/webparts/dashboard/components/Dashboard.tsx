@@ -9,6 +9,8 @@ import { AIFilesContextProvider } from '../../../context/AIFilesContext';
 import { SPOSearchService } from '../../../services/SPOSearchService';
 
 const Dashboard: React.FC<IDashboardProps> = (props) => {
+  const { context } = props;
+
   // Declare state variables
   const [items, setItems] = React.useState<AIFileObject[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -37,20 +39,10 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
         <h1>{strings.Title}</h1>
         {isLoading && <DashboardTable items={undefined!} />}
 
-        {!isLoading && items.length === 0 && (
-          <DashboardTable
-            items={[{
-              Name: strings.Messages.NoCopilotFound,
-              FileExtension: undefined!,
-              DefaultEncodingUrl: undefined!,
-              ParentLink: undefined!,
-              SPSiteURL: undefined!,
-            }]}
-          />
-        )}
-
         {!isLoading && items.length > 0 && (
-          <DashboardTable items={items} />
+          <DashboardTable
+            items={items}
+            userLoginName={context.pageContext.user.loginName} />
         )}
       </section>
     </AIFilesContextProvider>
