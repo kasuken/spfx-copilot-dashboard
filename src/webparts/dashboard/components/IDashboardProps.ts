@@ -1,6 +1,6 @@
 import { SPFI } from "@pnp/sp";
 
-import { AIFileObjects } from "../../../models/AIFileObject";
+import AIFileObject, { AIFileObjects } from "../../../models/AIFileObject";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 
 export interface IDashboardProps {
@@ -8,4 +8,5 @@ export interface IDashboardProps {
 	spfI : SPFI;
 	context: WebPartContext;
 	onSearchResults: (searchResults: AIFileObjects) => void;
+	onObjectSelected: (selectedItem: AIFileObject) => void;
 }

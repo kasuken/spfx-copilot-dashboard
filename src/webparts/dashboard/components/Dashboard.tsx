@@ -43,7 +43,9 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
         {!isLoading && items.length > 0 && (
           <DashboardTable
             items={items}
-            userLoginName={context.pageContext.user.loginName} />
+            userLoginName={context.pageContext.user.loginName}
+            onItemClicked={props.onObjectSelected}
+          />
         )}
       </section>
     </AIFilesContextProvider>
