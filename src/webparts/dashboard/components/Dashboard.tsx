@@ -24,6 +24,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
         const results = await searchService.search();
         // Set the items state variable
         setItems(results);
+        props.onSearchResults({ value: results });
       } catch (error) {
         console.error("Error fetching search results:", error);
       } finally {
@@ -31,7 +32,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       }
     })();
   }, []);
-  
+
 
   return (
     <AIFilesContextProvider searchResults={!isLoading && items.length === 0 ? items : []}>
