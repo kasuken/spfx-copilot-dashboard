@@ -17,7 +17,7 @@ import "@pnp/sp/site-users/web";
 import "@pnp/sp/site-users";
 import Dashboard from './components/Dashboard';
 import { IDashboardProps } from './components/IDashboardProps';
-import { AIFileObjects } from '../../models/AIFileObject';
+import AIFileObject, { AIFileObjects } from '../../models/AIFileObject';
 
 export interface IDashboardWebPartProps {
 }
@@ -25,16 +25,21 @@ export interface IDashboardWebPartProps {
 export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWebPartProps> implements IDynamicDataCallables {
 
   private static SpoAIObjectsId = 'spoAIObjects';
+  private static SpoAIObjectSelectedId = 'spoAIObjectSelected';
+
   private _userIsAdmin: boolean = false;
   private _aiObjectsSearchResults: AIFileObjects;
-  private _spFi : SPFI;
+  private _aiObjectSelected: AIFileObject;
+  private _spFi: SPFI;
+
   public render(): void {
     const element: React.ReactElement<IDashboardProps> = React.createElement(
       Dashboard,
       {
         userIsAdmin: this._userIsAdmin,
         onSearchResults: this.aiObjectsSearchResultsRetrieved.bind(this),
-        spfI : this._spFi,
+        onObjectSelected: this.aiObjectSelected.bind(this),
+        spfI: this._spFi,
         context: this.context
       }
     );
@@ -63,6 +68,11 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
     this.context.dynamicDataSourceManager.notifyPropertyChanged(DashboardWebPart.SpoAIObjectsId);
   }
 
+  private aiObjectSelected(selectedItem: AIFileObject): void {
+    this._aiObjectSelected = selectedItem;
+    this.context.dynamicDataSourceManager.notifyPropertyChanged(DashboardWebPart.SpoAIObjectSelectedId);
+  }
+
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
     if (!currentTheme) {
       return;
@@ -80,12 +90,15 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
 
   public getPropertyDefinitions(): ReadonlyArray<IDynamicDataPropertyDefinition> {
     return [
-      { id: DashboardWebPart.SpoAIObjectsId, title: `SPO AI Objects (${this.context.instanceId})` }
+      { id: DashboardWebPart.SpoAIObjectsId, title: `SPO AI Objects (${this.context.instanceId})` },
+      { id: DashboardWebPart.SpoAIObjectSelectedId, title: `SPO AI Object selected (${this.context.instanceId})` }
     ];
   }
 
   public getPropertyValue(propertyId: string): AIFileObjects {
     if (propertyId === DashboardWebPart.SpoAIObjectsId) return this._aiObjectsSearchResults;
+    else if (propertyId === DashboardWebPart.SpoAIObjectSelectedId) return { value: [this._aiObjectSelected] };
+
     throw new Error(`property ${propertyId} not found`);
   }
 

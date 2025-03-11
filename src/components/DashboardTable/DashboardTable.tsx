@@ -14,13 +14,14 @@ export interface IDashboardTableProps {
   items?: AIFileObject[];
   disabled?: boolean;
   userLoginName?: string;
+  onItemClicked?: (selectedItem: AIFileObject) => void;
 }
 
 const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
 
   const { items, userLoginName } = props;
   const { selectedAiFile, setSelectedAiFile } = React.useContext(AIFilesContext);
-  const [ showAllFiles, setShowAllFiles ] = React.useState(true);
+  const [showAllFiles, setShowAllFiles] = React.useState(true);
   const columns = getTableColumns();
 
   const filteredItems = React.useCallback((itemType: ItemType) => {
@@ -49,6 +50,12 @@ const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
       layoutMode={DetailsListLayoutMode.justified}
       selectionMode={SelectionMode.none}
       selectionPreservedOnEmptyClick={true}
+      onActiveItemChanged={(item: AIFileObject) => {
+        if (props.onItemClicked) {
+          props.onItemClicked(item);
+        }
+      }
+      }
     />;
   }
 
@@ -70,7 +77,7 @@ const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
         </PivotItem>
         <PivotItem headerText={strings.AgentsTabTitle}>
           {renderDashboardTable(columns, filteredItems(ItemType.Agents))}
-        </PivotItem>      
+        </PivotItem>
       </Pivot>
 
       <AIFileDetailsViewer
