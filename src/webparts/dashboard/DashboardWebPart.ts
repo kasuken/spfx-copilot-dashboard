@@ -1,10 +1,11 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
+import * as strings from "DashboardWebPartStrings";
 import { Version } from '@microsoft/sp-core-library';
-// import {
-//   type IPropertyPaneConfiguration,
-//   PropertyPaneTextField
-// } from '@microsoft/sp-property-pane';
+import {
+  type IPropertyPaneConfiguration,
+  PropertyPaneTextField
+} from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import {
@@ -20,6 +21,7 @@ import { IDashboardProps } from './components/IDashboardProps';
 import AIFileObject, { AIFileObjects } from '../../models/AIFileObject';
 
 export interface IDashboardWebPartProps {
+  title: string;
 }
 
 export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWebPartProps> implements IDynamicDataCallables {
@@ -40,7 +42,8 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
         onSearchResults: this.aiObjectsSearchResultsRetrieved.bind(this),
         onObjectSelected: this.aiObjectSelected.bind(this),
         spfI: this._spFi,
-        context: this.context
+        context: this.context,
+        title: this.properties.title
       }
     );
 
@@ -110,26 +113,26 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
     return Version.parse('1.0');
   }
 
-  // TODO: Remove if not needed
-  // protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-  //   return {
-  //     pages: [
-  //       {
-  //         header: {
-  //           description: strings.PropertyPaneDescription
-  //         },
-  //         groups: [
-  //           {
-  //             groupName: strings.BasicGroupName,
-  //             groupFields: [
-  //               PropertyPaneTextField('description', {
-  //                 label: strings.DescriptionFieldLabel
-  //               })
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   };
-  // }
+  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+    return {
+      pages: [
+        {
+          header: {
+            description: strings.PropertyPaneDescription
+          },
+          groups: [
+            {
+              groupName: strings.ConfigurationsGroupName,
+              groupFields: [
+                PropertyPaneTextField('title', {
+                  label: strings.TitleFieldLabel,
+                  value: this.properties.title
+                })
+              ]
+            }
+          ]
+        }
+      ]
+    };
+  }
 }
