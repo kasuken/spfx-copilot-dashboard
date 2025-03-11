@@ -1,5 +1,7 @@
 declare interface IAiFileDetailsWebPartStrings {
 	PropertyPaneDescription: string;
+	ConfigurationsGroupName: string;
+	TitleFieldLabel: string;
 	DynamicGroupName: string;
 	SourceAIFileFieldLabel: string;
 }

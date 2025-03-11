@@ -1,5 +1,7 @@
 define([], function() {
   return {
-    "Title": "Dashboard"
+    PropertyPaneDescription: "Here you can configure the web part.",
+    ConfigurationsGroupName: "Configurations",
+    TitleFieldLabel: "Title",
   }
 });

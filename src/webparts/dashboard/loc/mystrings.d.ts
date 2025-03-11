@@ -1,5 +1,7 @@
 declare interface IDashboardWebPartStrings {
-	Title: string;
+	PropertyPaneDescription: string;
+  ConfigurationsGroupName: string;
+  TitleFieldLabel: string;
 }
 
 declare module 'DashboardWebPartStrings' {

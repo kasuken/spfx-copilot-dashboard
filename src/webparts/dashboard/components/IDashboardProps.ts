@@ -9,4 +9,5 @@ export interface IDashboardProps {
 	context: WebPartContext;
 	onSearchResults: (searchResults: AIFileObjects) => void;
 	onObjectSelected: (selectedItem: AIFileObject) => void;
+	title?: string;
 }
