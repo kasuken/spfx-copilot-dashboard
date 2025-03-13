@@ -49,7 +49,7 @@ const getTableColumns = (): IColumn[] => {
 			key: "parentLinkColumn",
 			name: strings.AIFileObject.ParentLink,
 			fieldName: getPropertyName<AIFileObject>("ParentLink"),
-			minWidth: 100,
+			minWidth: 50,
 			isResizable: true,
 			onRender: (item: AIFileObject) => {
 				return renderParentLinkButton({ item });
@@ -58,7 +58,7 @@ const getTableColumns = (): IColumn[] => {
 		{
 			key: "operationButton",
 			name: "",
-			minWidth: 100,
+			minWidth: 50,
 			isResizable: true,
 			onRender: (item: AIFileObject) => {
 				return renderDisplayButton({ item });
