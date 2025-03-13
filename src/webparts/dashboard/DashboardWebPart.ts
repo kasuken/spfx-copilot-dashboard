@@ -99,11 +99,16 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
   }
 
   public getPropertyValue(propertyId: string): AIFileObjects {
-    if (propertyId === DashboardWebPart.SpoAIObjectsId) return this._aiObjectsSearchResults;
-    else if (propertyId === DashboardWebPart.SpoAIObjectSelectedId) return { value: [this._aiObjectSelected] };
-
+    if (propertyId === DashboardWebPart.SpoAIObjectsId) {
+      return this._aiObjectsSearchResults || { value: [] };
+    } 
+    else if (propertyId === DashboardWebPart.SpoAIObjectSelectedId) {
+      return this._aiObjectSelected ? { value: [this._aiObjectSelected] } : { value: [] };
+    }
+    
     throw new Error(`property ${propertyId} not found`);
   }
+  
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
