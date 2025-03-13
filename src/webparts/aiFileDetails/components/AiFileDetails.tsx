@@ -67,30 +67,31 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
   };
 
   public render(): React.ReactElement<IAiFileDetailsProps> {
-    const { title } = this.props;
+    const { title, hideWebpartIfEmpty } = this.props;
     const { gptDefinition, aiFile } = this.state;
+
     return (
-      <section className={styles.aiFileDetails}>
-        {gptDefinition === null &&
-          <>
-            {title && title.length > 0 && <h1>{title}</h1>}
-            <Card style={{ padding: 16 }}>
-              <Body1Strong>{strings.SelectFileMessage}</Body1Strong>
-            </Card>
-          </>
-        }
-        {gptDefinition !== null && (
-          <>
-            {title && title.length > 0 && <h1>{title}</h1>}
-            <AIHelperDetails
-              name={aiFile?.value?.[0].Name || ""}
-              description={gptDefinition.description}
-              instructions={gptDefinition.instructions}
-            />
-          </>
-        )
-        }
-      </section>
+        <section className={styles.aiFileDetails}>
+          {gptDefinition === null && !hideWebpartIfEmpty &&
+            <>
+              {title && title.length > 0 && <h1>{title}</h1>}
+              <Card style={{ padding: 16 }}>
+                <Body1Strong>{strings.SelectFileMessage}</Body1Strong>
+              </Card>
+            </>
+          }
+          {gptDefinition !== null && (
+            <>
+              {title && title.length > 0 && <h1>{title}</h1>}
+              <AIHelperDetails
+                name={aiFile?.value?.[0].Name || ""}
+                description={gptDefinition.description}
+                instructions={gptDefinition.instructions}
+              />
+            </>
+          )
+          }
+        </section>
     );
   }
 }
