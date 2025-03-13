@@ -23,6 +23,7 @@ export default class AiFileDetailsWebPart extends BaseClientSideWebPart<IAiFileD
 			React.createElement(AiFileDetails, {
 				sourceAIFile: sourceAIFile,
 				title: title,
+				context: this.context
 			});
 
 		ReactDom.render(element, this.domElement);
