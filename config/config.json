@@ -25,6 +25,7 @@
 		"DashboardTableStrings": "lib/components/DashboardTable/loc/{locale}.js",
 		"DashboardToolbarStrings": "lib/components/DashboardToolbar/loc/{locale}.js",
 		"AIFileDetailsViewerStrings": "lib/components/AIFileDetailsViewer/loc/{locale}.js",
-    "AiFileDetailsWebPartStrings": "lib/webparts/aiFileDetails/loc/{locale}.js"
+    "AiFileDetailsWebPartStrings": "lib/webparts/aiFileDetails/loc/{locale}.js",
+    "AIHelperDetailsStrings": "lib/components/AIHelperDetails/loc/{locale}.js"
 	}
 }

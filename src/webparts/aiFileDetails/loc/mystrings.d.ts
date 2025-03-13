@@ -4,6 +4,7 @@ declare interface IAiFileDetailsWebPartStrings {
 	TitleFieldLabel: string;
 	DynamicGroupName: string;
 	SourceAIFileFieldLabel: string;
+	SelectFileMessage: string;
 }
 
 declare module 'AiFileDetailsWebPartStrings' {

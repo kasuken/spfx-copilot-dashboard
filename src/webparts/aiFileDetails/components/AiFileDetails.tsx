@@ -1,9 +1,11 @@
 import * as React from 'react';
+import * as strings from 'AiFileDetailsWebPartStrings';
 import styles from './AiFileDetails.module.scss';
 import type { IAiFileDetailsProps, IAiFileDetailsState } from './IAiFileDetailsProps';
 import { SPHttpClient } from '@microsoft/sp-http';
 import AIHelperDetails from '../../../components/AIHelperDetails/AIHelperDetails';
-//import AIFileObject from '../../../models/AIFileObject';
+import { Card } from "@fluentui/react-components";
+import { Subtitle2 } from "@fluentui/react-components";
 
 export default class AiFileDetails extends React.Component<IAiFileDetailsProps,IAiFileDetailsState> {
   constructor(props: IAiFileDetailsProps) {
@@ -66,16 +68,25 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps,I
   };
 
   public render(): React.ReactElement<IAiFileDetailsProps> {
-    const {title } = this.props;
+    const { title } = this.props;
+    const { gptDefinition, aiFile } = this.state;
     return (
       <section className={styles.aiFileDetails}>
-        {this.state.gptDefinition !== null && (
+        {gptDefinition === null && 
+        <>
+          {title && title.length > 0 && <h1>{title}</h1>}
+          <Card style={{ width: 300, padding: 16 }}>
+            <Subtitle2>{strings.SelectFileMessage}</Subtitle2>
+          </Card>
+        </>
+        }
+        {gptDefinition !== null && (
             <>
               {title && title.length > 0 && <h1>{title}</h1>}
               <AIHelperDetails
-                name={this.state.aiFile?.value?.[0].Name}
-                description={this.state.gptDefinition.description}
-                instructions={this.state.gptDefinition.instructions}
+                name={aiFile?.value?.[0].Name || ""}
+                description={gptDefinition.description}
+                instructions={gptDefinition.instructions}
               />
             </>
           )
