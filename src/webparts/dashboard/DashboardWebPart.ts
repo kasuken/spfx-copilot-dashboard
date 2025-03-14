@@ -39,7 +39,7 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
   private _spFi: SPFI;
 
   public render(): void {
-    const filterQueryText = this.properties.filterQuerySource.tryGetValue();
+    const filterQueryText = this.properties.filterQuerySource?.tryGetValue();
 
     const element: React.ReactElement<IDashboardProps> = React.createElement(
       Dashboard,
