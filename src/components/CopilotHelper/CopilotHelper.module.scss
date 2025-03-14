@@ -1,0 +1,39 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+
+$chat-background-color: var(--neutralLighterAlt);
+$chat-border-color: var(--neutralQuaternaryAlt);
+
+
+.CopilotHelper {
+  overflow: hidden;
+  padding-top: 1em;
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  &.teams {
+    font-family: $ms-font-family-fallbacks;
+  }
+
+  .chatContainer {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+    overflow-y: auto;
+    background-color: white;
+    border-top: 1px solid $chat-border-color;
+  }
+  .webChat {
+    width: 100%;
+    height: 100%;
+}
+.botResponse {
+    /* Add styles for botResponse */
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+}
