@@ -13,4 +13,6 @@ export interface ICopilotHelperProps {
     welcomeMessage:string;
     agentUrl:string;
     selectedAgentName:string;
+    isOpen: boolean;
+    onDismiss: (e: any) => void; 
 }
