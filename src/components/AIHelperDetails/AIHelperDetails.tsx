@@ -18,10 +18,11 @@ interface IAgentCardProps {
   description: string;
   instructions: string;
   agentType?: string;
+  onActionButtonClick: () => void;
 }
 
 const AgentCard: React.FC<IAgentCardProps> = (props) => {
-  const { name, description, instructions, agentType } = props;
+  const { name, description, instructions, agentType, onActionButtonClick } = props;
   const theme = useTheme();
   const majicWandIcon: IIconProps = { iconName: 'AutoEnhanceOn', styles: { root: { color: theme.palette.neutralLight } } };
 
@@ -49,7 +50,9 @@ const AgentCard: React.FC<IAgentCardProps> = (props) => {
           </>
         }
         <CardFooter>
-          <ActionButton text={strings.MajicWandButtonText} className={styles['btn-grad']} iconProps={majicWandIcon} title={strings.MajicWandButtonText} ariaLabel="Emoji" onClick={() => { }} />
+          <ActionButton text={strings.MajicWandButtonText} className={styles['btn-grad']}
+            iconProps={majicWandIcon} title={strings.MajicWandButtonText} ariaLabel="Emoji" 
+            onClick={onActionButtonClick} />
         </CardFooter>
       </Card>
     </section>

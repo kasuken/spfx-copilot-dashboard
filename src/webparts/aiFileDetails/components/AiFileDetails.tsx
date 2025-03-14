@@ -9,9 +9,7 @@ import { Body1Strong, Card } from "@fluentui/react-components";
 //import { Subtitle2 } from "@fluentui/react-components";
 import { ConfigurationService } from '../../../services/ConfigurationService';
 import CopilotHelper from '../../../components/CopilotHelper/CopilotHelper';
-import { IconButton } from '@fluentui/react/lib/Button';
-import { IIconProps } from '@fluentui/react';
-const majicWandIcon: IIconProps = { iconName: 'AutoEnhanceOn' };
+
 
 export default class AiFileDetails extends React.Component<IAiFileDetailsProps, IAiFileDetailsState> {
   private _configurationService: ConfigurationService;
@@ -92,6 +90,7 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
   public render(): React.ReactElement<IAiFileDetailsProps> {
     const { title, context, hideWebpartIfEmpty } = this.props;
     const { gptDefinition, aiFile, showCopilotHelper } = this.state;
+
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     return (
       <section className={styles.aiFileDetails}>
@@ -111,8 +110,8 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
                 name={aiFile?.value?.[0].Name || ""}
                 description={gptDefinition.description}
                 instructions={gptDefinition.instructions}
+                onActionButtonClick={this.toggleCopilotHelper}
               />
-              <IconButton iconProps={majicWandIcon} title="Ask the Bishop" ariaLabel="Emoji" onClick={this.toggleCopilotHelper} />
             </div>
 
             {showCopilotHelper && (
