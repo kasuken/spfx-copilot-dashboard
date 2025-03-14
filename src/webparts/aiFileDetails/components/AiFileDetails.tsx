@@ -5,22 +5,24 @@ import type { IAiFileDetailsProps, IAiFileDetailsState } from './IAiFileDetailsP
 import { SPHttpClient } from '@microsoft/sp-http';
 import AIHelperDetails from '../../../components/AIHelperDetails/AIHelperDetails';
 
-import { Body1Strong,Card } from "@fluentui/react-components";
+import { Body1Strong, Card } from "@fluentui/react-components";
 //import { Subtitle2 } from "@fluentui/react-components";
 import { ConfigurationService } from '../../../services/ConfigurationService';
 import CopilotHelper from '../../../components/CopilotHelper/CopilotHelper';
-
-
+import { IconButton } from '@fluentui/react/lib/Button';
+import { IIconProps } from '@fluentui/react';
+const majicWandIcon: IIconProps = { iconName: 'AutoEnhanceOn' };
 
 export default class AiFileDetails extends React.Component<IAiFileDetailsProps, IAiFileDetailsState> {
   private _configurationService: ConfigurationService;
-  private _configuration : any;
+  private _configuration: any;
   constructor(props: IAiFileDetailsProps) {
     super(props);
     this.state = {
       aiFile: null,
       gptDefinition: null,
-      error: ""
+      error: "",
+      showCopilotHelper: false
     };
   }
 
@@ -82,49 +84,63 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
     }
   };
 
+  toggleCopilotHelper = () => {
+    console.log("🔹 Toggling Copilot Helper");
+    this.setState({ showCopilotHelper: !this.state.showCopilotHelper });
+  };
+
   public render(): React.ReactElement<IAiFileDetailsProps> {
     const { title, context, hideWebpartIfEmpty } = this.props;
-    const { gptDefinition, aiFile } = this.state;
+    const { gptDefinition, aiFile, showCopilotHelper } = this.state;
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     return (
-        <section className={styles.aiFileDetails}>
-          {gptDefinition === null && !hideWebpartIfEmpty &&
-            <>
-              {title && title.length > 0 && <h1>{title}</h1>}
-              <Card style={{ padding: 16 }}>
-                <Body1Strong>{strings.SelectFileMessage}</Body1Strong>
-              </Card>
-            </>
-          }
-          {gptDefinition !== null && (
-            <>
-              {title && title.length > 0 && <h1>{title}</h1>}
+      <section className={styles.aiFileDetails}>
+        {gptDefinition === null && !hideWebpartIfEmpty &&
+          <>
+            {title && title.length > 0 && <h1>{title}</h1>}
+            <Card style={{ padding: 16 }}>
+              <Body1Strong>{strings.SelectFileMessage}</Body1Strong>
+            </Card>
+          </>
+        }
+        {gptDefinition !== null && (
+          <>
+            {title && title.length > 0 && <h1>{title}</h1>}
+            <div className={styles.aiContainer}>
               <AIHelperDetails
                 name={aiFile?.value?.[0].Name || ""}
                 description={gptDefinition.description}
                 instructions={gptDefinition.instructions}
               />
+              <IconButton iconProps={majicWandIcon} title="Ask the Bishop" ariaLabel="Emoji" onClick={this.toggleCopilotHelper} />
+            </div>
+
+            {showCopilotHelper && (
               <CopilotHelper
                 key={aiFile?.value?.[0].DefaultEncodingUrl || ''}
                 botName={this._configuration.botName}
-                botURL= {this._configuration.botURL}
-                clientID = {this._configuration.clientID}
-                authority = {this._configuration.authority}
-                customScope=  {this._configuration.customScope}
-                userEmail = {context.pageContext.user.email}
-                userFriendlyName = {context.pageContext.user.displayName}
-                greet = {this._configuration.greet}
-                userDisplayName = {context.pageContext.user.displayName}
+                botURL={this._configuration.botURL}
+                clientID={this._configuration.clientID}
+                authority={this._configuration.authority}
+                customScope={this._configuration.customScope}
+                userEmail={context.pageContext.user.email}
+                userFriendlyName={context.pageContext.user.displayName}
+                greet={this._configuration.greet}
+                userDisplayName={context.pageContext.user.displayName}
                 botAvatarImage={this._configuration.botAvatarImage}
                 botAvatarInitials={this._configuration.botAvatarInitials}
-                welcomeMessage= 'Asking Copilot to summarize about the selected Agent'
+                welcomeMessage='Asking Copilot to summarize about the selected Agent'
                 agentUrl={this.state.aiFile?.value?.[0].DefaultEncodingUrl || ''}
                 selectedAgentName={aiFile?.value?.[0].Name || ""}
+                isOpen={showCopilotHelper}
+                onDismiss={this.toggleCopilotHelper}
               />
-            </>
-          )
-          }
-        </section>
+            )}
+
+          </>
+        )
+        }
+      </section>
     );
   }
 }

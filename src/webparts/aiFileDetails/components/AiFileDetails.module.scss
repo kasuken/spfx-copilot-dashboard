@@ -10,4 +10,11 @@
   &.teams {
     font-family: $ms-font-family-fallbacks;
   }
+
+  .aiContainer{
+    display: flex;
+    align-items: flex-start; 
+    justify-content: space-between; 
+    gap: 12px;
+  }
 }
