@@ -3,5 +3,6 @@ define([], function() {
     PropertyPaneDescription: "Here you can configure the web part.",
     ConfigurationsGroupName: "Configurations",
     TitleFieldLabel: "Title",
+    FilterQuerySourceLabel: "Filter Query Source",
   }
 });

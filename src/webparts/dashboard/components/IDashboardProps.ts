@@ -10,4 +10,5 @@ export interface IDashboardProps {
 	onSearchResults: (searchResults: AIFileObjects) => void;
 	onObjectSelected: (selectedItem: AIFileObject) => void;
 	title?: string;
+	filterText?: string;
 }
