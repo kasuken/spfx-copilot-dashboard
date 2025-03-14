@@ -3,7 +3,7 @@
   "solution": {
     "name": "spfx-copilot-dashboard-client-side-solution",
     "id": "f6a58bd9-44b9-44b6-907f-f06fa497b9d4",
-    "version": "1.0.2.0",
+    "version": "1.0.3.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,

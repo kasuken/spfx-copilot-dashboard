@@ -1,6 +1,6 @@
 {
 	"name": "spfx-copilot-dashboard",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"private": true,
 	"engines": {
 		"node": ">=18.17.1 <19.0.0"
