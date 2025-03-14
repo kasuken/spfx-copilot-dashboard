@@ -22,6 +22,9 @@
 		"@microsoft/sp-webpart-base": "1.20.0",
 		"@pnp/graph": "^4.10.0",
 		"@pnp/sp": "^4.10.0",
+		"@uifabric/react-hooks": "^7.16.4",
+		"botframework-webchat": "^4.15.9",
+		"p-defer-es5": "^2.0.1",
 		"react": "17.0.1",
 		"react-dom": "17.0.1",
 		"tslib": "2.3.1"

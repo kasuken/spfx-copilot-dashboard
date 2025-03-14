@@ -4,9 +4,20 @@ import styles from './AiFileDetails.module.scss';
 import type { IAiFileDetailsProps, IAiFileDetailsState } from './IAiFileDetailsProps';
 import { SPHttpClient } from '@microsoft/sp-http';
 import AIHelperDetails from '../../../components/AIHelperDetails/AIHelperDetails';
+
+import { Card } from "@fluentui/react-components";
+import { Subtitle2 } from "@fluentui/react-components";
+import { ConfigurationService } from '../../../services/ConfigurationService';
+import CopilotHelper from '../../../components/CopilotHelper/CopilotHelper';
+
+export default class AiFileDetails extends React.Component<IAiFileDetailsProps,IAiFileDetailsState> {
+  private _configurationService: ConfigurationService;
+  private _configuration : any;
 import { Body1Strong, Card } from "@fluentui/react-components";
 
 export default class AiFileDetails extends React.Component<IAiFileDetailsProps, IAiFileDetailsState> {
+  private _configurationService: ConfigurationService;
+  private _configuration : any;
   constructor(props: IAiFileDetailsProps) {
     super(props);
     this.state = {
@@ -16,11 +27,19 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
     };
   }
 
-  componentDidMount() {
-    if (this.props.sourceAIFile) {
-      const aiFile = this.props.sourceAIFile.tryGetValue();
+  async componentDidMount() {
+    const { context, sourceAIFile } = this.props;
+    this._configurationService = new ConfigurationService(context);
+    this._configuration = await this._configurationService.getConfiguration();
+    console.log("✅ Copilot Configuration in componentDidMount:", this._configuration);
+    if (sourceAIFile) {
+      const aiFile = sourceAIFile.tryGetValue();
       console.log("✅ AI File in componentDidMount:", aiFile);
       this.setState({ aiFile: aiFile ? { value: [aiFile] } : { value: [] } });
+
+      if (aiFile?.DefaultEncodingUrl) {
+        await this.fetchAgentFile(aiFile.DefaultEncodingUrl);
+      }
     }
   }
 
@@ -57,7 +76,7 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
 
       const fileText = await response.text();
       const jsonData = JSON.parse(fileText);
-
+      console.log(jsonData.customCopilotConfig?.gptDefinition);
       // ✅ Store gptDefinition in the component's state
       this.setState({ gptDefinition: jsonData.customCopilotConfig?.gptDefinition || null, error: "" });
     } catch (error: any) {
@@ -67,9 +86,9 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
   };
 
   public render(): React.ReactElement<IAiFileDetailsProps> {
-    const { title, hideWebpartIfEmpty } = this.props;
+    const { title, context, hideWebpartIfEmpty } = this.props;
     const { gptDefinition, aiFile } = this.state;
-
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     return (
         <section className={styles.aiFileDetails}>
           {gptDefinition === null && !hideWebpartIfEmpty &&
@@ -87,6 +106,23 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
                 name={aiFile?.value?.[0].Name || ""}
                 description={gptDefinition.description}
                 instructions={gptDefinition.instructions}
+              />
+              <CopilotHelper
+                key={aiFile?.value?.[0].DefaultEncodingUrl || ''}
+                botName={this._configuration.botName}
+                botURL= {this._configuration.botURL}
+                clientID = {this._configuration.clientID}
+                authority = {this._configuration.authority}
+                customScope=  {this._configuration.customScope}
+                userEmail = {context.pageContext.user.email}
+                userFriendlyName = {context.pageContext.user.displayName}
+                greet = {this._configuration.greet}
+                userDisplayName = {context.pageContext.user.displayName}
+                botAvatarImage={this._configuration.botAvatarImage}
+                botAvatarInitials={this._configuration.botAvatarInitials}
+                welcomeMessage= 'Asking Copilot to summarize about the selected Agent'
+                agentUrl={this.state.aiFile?.value?.[0].DefaultEncodingUrl || ''}
+                selectedAgentName={aiFile?.value?.[0].Name || ""}
               />
             </>
           )
