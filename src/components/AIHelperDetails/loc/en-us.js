@@ -3,5 +3,6 @@ define([], function() {
 		Description: "Description",
 		Instructions: "Instructions",
 		TypeOfAgent: "Type of Agent",
+		MajicWandButtonText: "How to use this helper",
 	};
 });
