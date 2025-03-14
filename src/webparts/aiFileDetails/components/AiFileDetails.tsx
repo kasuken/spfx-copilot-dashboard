@@ -5,15 +5,12 @@ import type { IAiFileDetailsProps, IAiFileDetailsState } from './IAiFileDetailsP
 import { SPHttpClient } from '@microsoft/sp-http';
 import AIHelperDetails from '../../../components/AIHelperDetails/AIHelperDetails';
 
-import { Card } from "@fluentui/react-components";
-import { Subtitle2 } from "@fluentui/react-components";
+import { Body1Strong,Card } from "@fluentui/react-components";
+//import { Subtitle2 } from "@fluentui/react-components";
 import { ConfigurationService } from '../../../services/ConfigurationService';
 import CopilotHelper from '../../../components/CopilotHelper/CopilotHelper';
 
-export default class AiFileDetails extends React.Component<IAiFileDetailsProps,IAiFileDetailsState> {
-  private _configurationService: ConfigurationService;
-  private _configuration : any;
-import { Body1Strong, Card } from "@fluentui/react-components";
+
 
 export default class AiFileDetails extends React.Component<IAiFileDetailsProps, IAiFileDetailsState> {
   private _configurationService: ConfigurationService;
