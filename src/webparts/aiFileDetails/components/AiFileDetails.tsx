@@ -5,7 +5,7 @@ import type { IAiFileDetailsProps, IAiFileDetailsState } from './IAiFileDetailsP
 import { SPHttpClient } from '@microsoft/sp-http';
 import AIHelperDetails from '../../../components/AIHelperDetails/AIHelperDetails';
 
-import { Body1Strong, Card } from "@fluentui/react-components";
+import { Body1, Body1Strong, Card } from "@fluentui/react-components";
 //import { Subtitle2 } from "@fluentui/react-components";
 import { ConfigurationService } from '../../../services/ConfigurationService';
 import CopilotHelper from '../../../components/CopilotHelper/CopilotHelper';
@@ -20,7 +20,8 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
       aiFile: null,
       gptDefinition: null,
       error: "",
-      showCopilotHelper: false
+      showCopilotHelper: false,
+      isLoading: false,
     };
   }
 
@@ -65,8 +66,9 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
     console.log("🔹 Fetching .agent file:", fileUrl);
 
     try {
-      const response = await this.props.context.spHttpClient.get(fileUrl, SPHttpClient.configurations.v1);
+      this.setState({ isLoading: true, gptDefinition: null, error: "" });
 
+      const response = await this.props.context.spHttpClient.get(fileUrl, SPHttpClient.configurations.v1);
       if (!response.ok) {
         throw new Error(`❌ Failed to fetch file. Status: ${response.status} - ${response.statusText}`);
       }
@@ -75,7 +77,7 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
       const jsonData = JSON.parse(fileText);
       console.log(jsonData.customCopilotConfig?.gptDefinition);
       // ✅ Store gptDefinition in the component's state
-      this.setState({ gptDefinition: jsonData.customCopilotConfig?.gptDefinition || null, error: "" });
+      this.setState({ isLoading: false, gptDefinition: jsonData.customCopilotConfig?.gptDefinition || null, error: "" });
     } catch (error: any) {
       console.error("❌ Error fetching .agent file:", error);
       this.setState({ error: error.message || JSON.stringify(error) });
@@ -89,7 +91,7 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
 
   public render(): React.ReactElement<IAiFileDetailsProps> {
     const { title, context, hideWebpartIfEmpty } = this.props;
-    const { gptDefinition, aiFile, showCopilotHelper } = this.state;
+    const { gptDefinition, aiFile, showCopilotHelper, isLoading } = this.state;
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     return (
@@ -98,7 +100,8 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps, 
           <>
             {title && title.length > 0 && <h1>{title}</h1>}
             <Card style={{ padding: 16 }}>
-              <Body1Strong>{strings.SelectFileMessage}</Body1Strong>
+              {isLoading && <Body1>Loading...</Body1>}
+              {!isLoading && <Body1Strong>{strings.SelectFileMessage}</Body1Strong>}
             </Card>
           </>
         }
