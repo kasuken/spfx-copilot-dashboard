@@ -2,9 +2,11 @@
 
 .aiFileDetails {
   overflow: hidden;
-  padding: 1em;
+  display: block;
+  padding: 0.3rem;
   color: "[theme:bodyText, default: #323130]";
   color: var(--bodyText);
+
   &.teams {
     font-family: $ms-font-family-fallbacks;
   }

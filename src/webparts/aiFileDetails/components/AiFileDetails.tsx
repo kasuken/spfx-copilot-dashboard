@@ -4,12 +4,18 @@ import styles from './AiFileDetails.module.scss';
 import type { IAiFileDetailsProps, IAiFileDetailsState } from './IAiFileDetailsProps';
 import { SPHttpClient } from '@microsoft/sp-http';
 import AIHelperDetails from '../../../components/AIHelperDetails/AIHelperDetails';
+
 import { Card } from "@fluentui/react-components";
 import { Subtitle2 } from "@fluentui/react-components";
 import { ConfigurationService } from '../../../services/ConfigurationService';
 import CopilotHelper from '../../../components/CopilotHelper/CopilotHelper';
 
 export default class AiFileDetails extends React.Component<IAiFileDetailsProps,IAiFileDetailsState> {
+  private _configurationService: ConfigurationService;
+  private _configuration : any;
+import { Body1Strong, Card } from "@fluentui/react-components";
+
+export default class AiFileDetails extends React.Component<IAiFileDetailsProps, IAiFileDetailsState> {
   private _configurationService: ConfigurationService;
   private _configuration : any;
   constructor(props: IAiFileDetailsProps) {
@@ -39,25 +45,25 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps,I
 
   static getDerivedStateFromProps(nextProps: IAiFileDetailsProps, prevState: IAiFileDetailsState) {
     const nextFile = nextProps.sourceAIFile?.tryGetValue();
-  
+
     if (JSON.stringify(prevState.aiFile) !== JSON.stringify(nextFile)) {
       return { aiFile: nextFile || [] };
     }
-    return null; 
+    return null;
   }
 
   componentDidUpdate(prevProps: IAiFileDetailsProps, prevState: IAiFileDetailsState) {
     if (JSON.stringify(prevState.aiFile) !== JSON.stringify(this.state.aiFile)) {
-      const file = this.state.aiFile?.value?.[0]; 
+      const file = this.state.aiFile?.value?.[0];
       if (file?.DefaultEncodingUrl) {
         this.fetchAgentFile(file.DefaultEncodingUrl);
       }
     }
   }
 
-    /**
-   * Fetches the .agent file content
-   */
+  /**
+ * Fetches the .agent file content
+ */
   fetchAgentFile = async (fileUrl: string) => {
     console.log("🔹 Fetching .agent file:", fileUrl);
 
@@ -80,20 +86,20 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps,I
   };
 
   public render(): React.ReactElement<IAiFileDetailsProps> {
-    const { title, context } = this.props;
+    const { title, context, hideWebpartIfEmpty } = this.props;
     const { gptDefinition, aiFile } = this.state;
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     return (
-      <section className={styles.aiFileDetails}>
-        {gptDefinition === null && 
-        <>
-          {title && title.length > 0 && <h1>{title}</h1>}
-          <Card style={{ width: 300, padding: 16 }}>
-            <Subtitle2>{strings.SelectFileMessage}</Subtitle2>
-          </Card>
-        </>
-        }
-        {gptDefinition !== null && (
+        <section className={styles.aiFileDetails}>
+          {gptDefinition === null && !hideWebpartIfEmpty &&
+            <>
+              {title && title.length > 0 && <h1>{title}</h1>}
+              <Card style={{ padding: 16 }}>
+                <Body1Strong>{strings.SelectFileMessage}</Body1Strong>
+              </Card>
+            </>
+          }
+          {gptDefinition !== null && (
             <>
               {title && title.length > 0 && <h1>{title}</h1>}
               <AIHelperDetails
@@ -102,7 +108,7 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps,I
                 instructions={gptDefinition.instructions}
               />
               <CopilotHelper
-                key={this.state.aiFile?.value?.[0].DefaultEncodingUrl || ''}
+                key={aiFile?.value?.[0].DefaultEncodingUrl || ''}
                 botName={this._configuration.botName}
                 botURL= {this._configuration.botURL}
                 clientID = {this._configuration.clientID}
@@ -120,8 +126,8 @@ export default class AiFileDetails extends React.Component<IAiFileDetailsProps,I
               />
             </>
           )
-        }
-      </section>
+          }
+        </section>
     );
   }
 }
