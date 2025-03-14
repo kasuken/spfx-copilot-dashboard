@@ -50,7 +50,7 @@ const AgentCard: React.FC<IAgentCardProps> = (props) => {
           </>
         }
         <CardFooter>
-          <ActionButton text={strings.MajicWandButtonText} className={styles['btn-grad']}
+          <ActionButton text={strings.MajicWandButtonText} className={styles.btnGradient}
             iconProps={majicWandIcon} title={strings.MajicWandButtonText} ariaLabel="Emoji" 
             onClick={onActionButtonClick} />
         </CardFooter>
