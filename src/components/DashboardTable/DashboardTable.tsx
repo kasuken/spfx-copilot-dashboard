@@ -39,7 +39,7 @@ const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
       });
     }
     return filtered;
-  }, [showAllFiles]);
+  }, [showAllFiles, items]);
 
   const renderDashboardTable = (columns: IColumn[], items: AIFileObject[]) => {
     return <ShimmeredDetailsList
@@ -61,26 +61,26 @@ const DashboardTable: React.FC<IDashboardTableProps> = (props) => {
 
   return (
     <section className={styles.dashboardTable}>
-        <div className={styles.dashboardToolbar}>
-          <DashboardToolbar
-            showAllFiles={showAllFiles}
-            onChange={(checked) => {
-              setShowAllFiles(checked === true);
-            }}
-          />
-        </div>
+      <div className={styles.dashboardToolbar}>
+        <DashboardToolbar
+          showAllFiles={showAllFiles}
+          onChange={(checked) => {
+            setShowAllFiles(checked === true);
+          }}
+        />
+      </div>
 
-        <Pivot>
-          <PivotItem headerText={strings.AllTabTitle}>
-            {renderDashboardTable(columns, filteredItems(ItemType.All))}
-          </PivotItem>
-          <PivotItem headerText={strings.CopilotsTabTitle}>
-            {renderDashboardTable(columns, filteredItems(ItemType.Copilots))}
-          </PivotItem>
-          <PivotItem headerText={strings.AgentsTabTitle}>
-            {renderDashboardTable(columns, filteredItems(ItemType.Agents))}
-          </PivotItem>
-        </Pivot>
+      <Pivot>
+        <PivotItem headerText={strings.AllTabTitle}>
+          {renderDashboardTable(columns, filteredItems(ItemType.All))}
+        </PivotItem>
+        <PivotItem headerText={strings.CopilotsTabTitle}>
+          {renderDashboardTable(columns, filteredItems(ItemType.Copilots))}
+        </PivotItem>
+        <PivotItem headerText={strings.AgentsTabTitle}>
+          {renderDashboardTable(columns, filteredItems(ItemType.Agents))}
+        </PivotItem>
+      </Pivot>
 
       <AIFileDetailsViewer
         isOpen={selectedAiFile !== undefined}

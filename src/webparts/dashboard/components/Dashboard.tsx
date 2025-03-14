@@ -8,11 +8,12 @@ import { AIFilesContextProvider } from '../../../context/AIFilesContext';
 import { SPOSearchService } from '../../../services/SPOSearchService';
 
 const Dashboard: React.FC<IDashboardProps> = (props) => {
-  const { context, title } = props;
+  const { context, title, filterText } = props;
 
   // Declare state variables
   const [items, setItems] = React.useState<AIFileObject[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [filteredItems, setFilteredItems] = React.useState<AIFileObject[]>(items);
 
   useEffect(() => {
     (async () => {
@@ -32,6 +33,14 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
     })();
   }, []);
 
+  useEffect(() => {
+    setFilteredItems(items);
+
+    if (filterText && filterText.length > 0) {
+      const filteredItems = items.filter((item) => item.Name.toLowerCase().includes(filterText.toLowerCase()));
+      setFilteredItems(filteredItems);
+    }
+  }, [filterText, items]);
 
   return (
     <AIFilesContextProvider searchResults={!isLoading && items.length === 0 ? items : []}>
@@ -41,7 +50,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
 
         {!isLoading && items.length > 0 && (
           <DashboardTable
-            items={items}
+            items={filteredItems?.length > 0 ? filteredItems : items}
             userLoginName={context.pageContext.user.loginName}
             onItemClicked={props.onObjectSelected}
           />
