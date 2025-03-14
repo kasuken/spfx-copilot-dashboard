@@ -117,7 +117,7 @@ const CopilotHelper: React.FC<ICopilotHelperProps> = (props) => {
         return ReactWebChat.createStore(
             {},
             ({ dispatch }: { dispatch: Dispatch }) => (next: any) => (action: any) => {
-                const activity = action.payload.activity;
+                const activity = action.payload?.activity;
                 console.log(activity);
                 // Checking whether we should greet the user
                 if (props.greet) {

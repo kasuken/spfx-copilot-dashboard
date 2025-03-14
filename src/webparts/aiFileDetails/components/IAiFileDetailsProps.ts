@@ -15,4 +15,5 @@ export interface IAiFileDetailsState {
   gptDefinition : any;
   error: string;
   showCopilotHelper: boolean;
+  isLoading: boolean;
 }

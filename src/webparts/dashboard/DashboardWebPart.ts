@@ -4,6 +4,7 @@ import * as strings from "DashboardWebPartStrings";
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
+  PropertyPaneDynamicField,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
@@ -12,6 +13,8 @@ import {
   IDynamicDataPropertyDefinition,
   IDynamicDataCallables
 } from '@microsoft/sp-dynamic-data';
+import { DynamicProperty } from "@microsoft/sp-component-base";
+
 import { SPFI, spfi, SPFx } from "@pnp/sp";
 import "@pnp/sp/webs";
 import "@pnp/sp/site-users/web";
@@ -22,6 +25,7 @@ import AIFileObject, { AIFileObjects } from '../../models/AIFileObject';
 
 export interface IDashboardWebPartProps {
   title: string;
+  filterQuerySource: DynamicProperty<string>;
 }
 
 export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWebPartProps> implements IDynamicDataCallables {
@@ -35,6 +39,8 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
   private _spFi: SPFI;
 
   public render(): void {
+    const filterQueryText = this.properties.filterQuerySource?.tryGetValue();
+
     const element: React.ReactElement<IDashboardProps> = React.createElement(
       Dashboard,
       {
@@ -43,7 +49,8 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
         onObjectSelected: this.aiObjectSelected.bind(this),
         spfI: this._spFi,
         context: this.context,
-        title: this.properties.title
+        title: this.properties.title,
+        filterText: filterQueryText
       }
     );
 
@@ -101,14 +108,13 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
   public getPropertyValue(propertyId: string): AIFileObjects {
     if (propertyId === DashboardWebPart.SpoAIObjectsId) {
       return this._aiObjectsSearchResults || { value: [] };
-    } 
+    }
     else if (propertyId === DashboardWebPart.SpoAIObjectSelectedId) {
       return this._aiObjectSelected ? { value: [this._aiObjectSelected] } : { value: [] };
     }
-    
+
     throw new Error(`property ${propertyId} not found`);
   }
-  
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
@@ -132,7 +138,10 @@ export default class DashboardWebPart extends BaseClientSideWebPart<IDashboardWe
                 PropertyPaneTextField('title', {
                   label: strings.TitleFieldLabel,
                   value: this.properties.title
-                })
+                }),
+                PropertyPaneDynamicField('filterQuerySource', {
+                  label: strings.FilterQuerySourceLabel,
+                }),
               ]
             }
           ]
