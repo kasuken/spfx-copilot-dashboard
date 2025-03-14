@@ -5,6 +5,7 @@ import { WebPartContext } from "@microsoft/sp-webpart-base";
 export interface IAiFileDetailsProps {
   sourceAIFile: DynamicProperty<AIFileObject>;
   title?: string;
+  hideWebpartIfEmpty?: boolean;
   context: WebPartContext;
 }
 

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import * as strings from 'AIHelperDetailsStrings';
-import { Card } from "@fluentui/react-components";
+import styles from './AIHelperDetails.module.scss';
+
 import {
-  Title3,
-  Subtitle2,
+  Subtitle1,
   Body1,
+  Body1Strong,
+  Card
 } from "@fluentui/react-components";
 
 interface IAgentCardProps {
@@ -18,22 +20,24 @@ const AgentCard: React.FC<IAgentCardProps> = (props) => {
   const { name, description, instructions, agentType } = props;
 
   return (
-    <Card style={{ width: 300, padding: 16 }}>
-      <Title3>{name}</Title3>
-      <Subtitle2>{strings.Description}</Subtitle2>
-      <Body1>{description}</Body1>
-      <Subtitle2>{strings.Instructions}</Subtitle2>
-      <Body1>{instructions}</Body1>
-      {agentType && 
-        <>
-            <Subtitle2>{strings.TypeOfAgent}</Subtitle2>
+    <section>
+      <div className={styles.title}>
+        <Subtitle1>{name}</Subtitle1>
+      </div>
+      <Card style={{ width: "100%", padding: 16 }}>
+        <Body1Strong>{strings.Description}</Body1Strong>
+        <Body1>{description}</Body1>
+        <Body1Strong>{strings.Instructions}</Body1Strong>
+        <Body1>{instructions}</Body1>
+        {agentType &&
+          <>
+            <Body1Strong>{strings.TypeOfAgent}</Body1Strong>
             <Body1>{agentType}</Body1>
-        </>
-      }
-
-    </Card>
+          </>
+        }
+      </Card>
+    </section>
   );
 };
 
 export default AgentCard;
- 

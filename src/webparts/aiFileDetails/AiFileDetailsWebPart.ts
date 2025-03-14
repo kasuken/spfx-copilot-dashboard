@@ -8,21 +8,23 @@ import AiFileDetails from './components/AiFileDetails';
 import { IAiFileDetailsProps } from './components/IAiFileDetailsProps';
 import { DynamicProperty } from "@microsoft/sp-component-base";
 import AIFileObject from '../../models/AIFileObject';
-import { PropertyPaneDynamicField, PropertyPaneTextField } from "@microsoft/sp-property-pane";
+import { PropertyPaneCheckbox, PropertyPaneDynamicField, PropertyPaneTextField } from "@microsoft/sp-property-pane";
 
 export interface IAiFileDetailsWebPartProps {
 	sourceAIFile: DynamicProperty<AIFileObject>;
+	hideWebpartIfEmpty?: boolean;
 	title?: string;
 }
 
 export default class AiFileDetailsWebPart extends BaseClientSideWebPart<IAiFileDetailsWebPartProps> {
 	public render(): void {
-		const { sourceAIFile, title } = this.properties;
+		const { sourceAIFile, title, hideWebpartIfEmpty } = this.properties;
 
 		const element: React.ReactElement<IAiFileDetailsProps> =
 			React.createElement(AiFileDetails, {
 				sourceAIFile: sourceAIFile,
 				title: title,
+				hideWebpartIfEmpty: hideWebpartIfEmpty,
 				context: this.context
 			});
 
@@ -51,7 +53,10 @@ export default class AiFileDetailsWebPart extends BaseClientSideWebPart<IAiFileD
                 PropertyPaneTextField('title', {
                   label: strings.TitleFieldLabel,
                   value: this.properties.title
-                })
+                }),
+								PropertyPaneCheckbox("hideWebpartIfEmpty", {
+									text: strings.HiddenIfEmptyCheckboxLabel,
+								}),
               ]
             },
 						{
