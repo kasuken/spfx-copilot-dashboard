@@ -1,0 +1,20 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.aiFileDetails {
+  overflow: hidden;
+  display: block;
+  padding: 0.3rem;
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+
+  &.teams {
+    font-family: $ms-font-family-fallbacks;
+  }
+
+  .aiContainer{
+    display: flex;
+    align-items: flex-start; 
+    justify-content: space-between; 
+    gap: 12px;
+  }
+}

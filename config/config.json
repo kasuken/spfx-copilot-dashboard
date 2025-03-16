@@ -9,11 +9,23 @@
           "manifest": "./src/webparts/dashboard/DashboardWebPart.manifest.json"
         }
       ]
+    },
+    "ai-file-details-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/aiFileDetails/AiFileDetailsWebPart.js",
+          "manifest": "./src/webparts/aiFileDetails/AiFileDetailsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "DashboardWebPartStrings": "lib/webparts/dashboard/loc/{locale}.js",
-    "DashboardTableStrings": "lib/components/DashboardTable/loc/{locale}.js"
-  }
+		"DashboardWebPartStrings": "lib/webparts/dashboard/loc/{locale}.js",
+		"DashboardTableStrings": "lib/components/DashboardTable/loc/{locale}.js",
+		"DashboardToolbarStrings": "lib/components/DashboardToolbar/loc/{locale}.js",
+		"AIFileDetailsViewerStrings": "lib/components/AIFileDetailsViewer/loc/{locale}.js",
+    "AiFileDetailsWebPartStrings": "lib/webparts/aiFileDetails/loc/{locale}.js",
+    "AIHelperDetailsStrings": "lib/components/AIHelperDetails/loc/{locale}.js"
+	}
 }

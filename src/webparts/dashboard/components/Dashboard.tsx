@@ -1,72 +1,62 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import styles from './Dashboard.module.scss';
-import * as strings from 'DashboardWebPartStrings';
 import type { IDashboardProps } from './IDashboardProps';
 import DashboardTable from '../../../components/DashboardTable/DashboardTable';
 import AIFileObject from '../../../models/AIFileObject';
-import SkeletonTable from '../../../components/SkeletonTable/SkeletonTable';
+import { AIFilesContextProvider } from '../../../context/AIFilesContext';
+import { SPOSearchService } from '../../../services/SPOSearchService';
 
 const Dashboard: React.FC<IDashboardProps> = (props) => {
-  // TODO: Load the actual data from the service
-  // Define custom mock items for the table
-  const mockItems: AIFileObject[] = [
-    {
-      Name: 'Item 1',
-      FileExtension: 'copilot',
-      FileUrl: 'https://www.bing.com',
-    },
-    {
-      Name: 'Item 2',
-      FileExtension: 'agent',
-      FileUrl: 'https://www.bing.com',
-    },
-    {
-      Name: 'Item 3',
-      FileExtension: 'copilot',
-      FileUrl: 'https://www.bing.com',
-    }
-  ];
+  const { context, title, filterText } = props;
 
   // Declare state variables
   const [items, setItems] = React.useState<AIFileObject[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [filteredItems, setFilteredItems] = React.useState<AIFileObject[]>(items);
 
   useEffect(() => {
-    // Load the data from the service
-    setItems(mockItems);
-
-    // TODO: Remove the following, it's only for demonstration purposes using mock data
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    (async () => {
+      try {
+        // Create a search service instance
+        const searchService = new SPOSearchService(props.spfI);
+        // Call the search method
+        const results = await searchService.search();
+        // Set the items state variable
+        setItems(results);
+        props.onSearchResults({ value: results });
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   }, []);
 
+  useEffect(() => {
+    setFilteredItems(items);
+
+    if (filterText && filterText.length > 0) {
+      const filteredItems = items.filter((item) => item.Name.toLowerCase().includes(filterText.toLowerCase()));
+      setFilteredItems(filteredItems);
+    }
+  }, [filterText, items]);
+
   return (
-    <section className={styles.dashboard}>
-      <h1>{strings.Title}</h1>
-      {/* Show the skeleton table while loading data */}
-      {isLoading && 
-        <SkeletonTable />}
+    <AIFilesContextProvider searchResults={!isLoading && items.length === 0 ? items : []}>
+      <section className={styles.dashboard}>
+        {title && title.length > 0 && <h1>{title}</h1>}
+        {isLoading && <DashboardTable items={undefined!} />}
 
-      {/* Show the table when data is loaded and there are no items available */}
-      {!isLoading && 
-        items.length === 0 && 
-        DashboardTable({
-          items: [{
-            Name: strings.Messages.NoCopilotFound,
-            FileExtension: undefined!,
-            FileUrl: undefined!
-          }]
-        })}
-
-      {/* Show the table when data is loaded and there are items available */}
-      {!isLoading && 
-        items.length > 0 && 
-        DashboardTable({
-          items: items
-        })}
-    </section>
+        {!isLoading && items.length > 0 && (
+          <DashboardTable
+            items={filteredItems?.length > 0 ? filteredItems : items}
+            userLoginName={context.pageContext.user.loginName}
+            onItemClicked={props.onObjectSelected}
+          />
+        )}
+      </section>
+    </AIFilesContextProvider>
   );
 };
 

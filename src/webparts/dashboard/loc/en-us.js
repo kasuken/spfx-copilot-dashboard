@@ -1,8 +1,8 @@
 define([], function() {
   return {
-    "Title": "Dashboard",
-    Messages: {
-      NoCopilotFound: "No copilot or agent found!",
-    }
+    PropertyPaneDescription: "Here you can configure the web part.",
+    ConfigurationsGroupName: "Configurations",
+    TitleFieldLabel: "Title",
+    FilterQuerySourceLabel: "Filter Query Source",
   }
 });

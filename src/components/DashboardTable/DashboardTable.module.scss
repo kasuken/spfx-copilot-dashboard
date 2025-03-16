@@ -7,8 +7,21 @@
   background-color: var(--bodyBackground);
 }
 
+.dashboardToolbar {
+  position: absolute;
+  margin-top: 1px;
+  height: 49px;
+  right: 0;
+  z-index: 1;
+  background-color: var(--bodyBackground);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.5rem;
+}
+
 .rowOperations {
-  display: "flex";
+  display: flex;
   align-items: flex-end;
   margin: 5px;
 }

@@ -1,25 +1,28 @@
 import * as React from "react";
 import { Button } from "@fluentui/react-components";
-import { DocumentRegular } from "@fluentui/react-icons";
+import { ChatRegular } from "@fluentui/react-icons";
 import AIFileObject from "../../../models/AIFileObject";
+import { AIFilesContext } from "../../../context/AIFilesContext";
 
 export interface IRenderDisplayButtonProps {
-  item: AIFileObject;
+	item: AIFileObject;
 }
 
 const renderDisplayButton: React.FC<IRenderDisplayButtonProps> = (props) => {
 	const { item } = props;
+	const { setSelectedAiFile } = React.useContext(AIFilesContext);
 
-  return (
+	if (!item || !item.DefaultEncodingUrl || item.DefaultEncodingUrl.length === 0) {
+		return <></>;
+	}
+
+	return (
 		<Button
-			icon={<DocumentRegular />}
+			icon={<ChatRegular />}
 			onClick={() => {
-				// TODO: Implement the display button click handler
-				alert("TODO: Implement the display button click handler");
-
-				console.log("item", item);
+				setSelectedAiFile(item);
 			}}
-			/>
+		/>
 	);
 };
 

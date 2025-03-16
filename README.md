@@ -1,65 +1,107 @@
-# spfx-copilot-dashboard
+# 🚀 SharePoint AI Agent Dashboard (SPFx Solution)
 
-## Summary
+## 📌 Overview
+This project is an **SPFx-based SharePoint Online (SPO) Dashboard** that enables users to explore and interact with deployed **SPO AI Agents** within their **Microsoft 365 Tenant**. The solution provides a seamless UI where users can:
 
-Short summary on functionality and used technologies.
+- Browse and select available AI Agents.
+- View detailed agent information in a **popup modal**.
+- Choose to interact with the selected agent.
 
-[picture of the solution in action, if possible]
-
-## Used SharePoint Framework Version
-
-![version](https://img.shields.io/badge/version-1.20.0-green.svg)
-
-## Applies to
-
-- [SharePoint Framework](https://aka.ms/spfx)
-- [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-
-> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
-
-## Prerequisites
-
-> Any special pre-requisites?
-
-## Solution
-
-| Solution    | Author(s)                                               |
-| ----------- | ------------------------------------------------------- |
-| folder name | Author details (name, company, twitter alias with link) |
-
-## Version history
-
-| Version | Date             | Comments        |
-| ------- | ---------------- | --------------- |
-| 1.1     | March 10, 2021   | Update comment  |
-| 1.0     | January 29, 2021 | Initial release |
-
-## Disclaimer
-
-**THIS CODE IS PROVIDED _AS IS_ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
+This dashboard simplifies AI-powered task execution by offering a **centralized interface** for managing and utilizing SharePoint AI Agents.
 
 ---
 
-## Minimal Path to Awesome
+## 👩‍💻 SharePoint Hackathon
 
-- Clone this repository
-- Ensure that you are at the solution folder
-- in the command-line run:
-  - **npm install**
-  - **gulp serve**
+This project is valid for the [SharePoint Hackathon](https://adoption.microsoft.com/en-us/sharepoint/hackathon/) open from 3rd March to 17th March 2025.
 
-> Include any additional steps as needed.
+![image](https://github.com/user-attachments/assets/c3a765a4-4410-4699-9a74-ef57e42c9bfb)
 
-## Features
+---
 
-Description of the extension that expands upon high-level summary above.
+## 🎯 Features
+✅ **SPFx-based web part** for easy deployment in SharePoint Online  
+✅ **Dynamic agent discovery** across the tenant  
+✅ **Popup modal** for detailed agent insights  
+✅ **Interactive UI** to trigger agent functionalities  
+✅ **Secure and seamless** SharePoint integration  
 
-This extension illustrates the following concepts:
+---
 
-- topic 1
-- topic 2
-- topic 3
+## 🛠️ Installation & Setup
+### Prerequisites
+Ensure you have the following tools installed:
 
-> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
+- Node.js (LTS version)
+- Gulp  
+  ```bash
+  npm install -g gulp
+  ```
 
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
+### Clone the Repository
+```bash
+git clone https://github.com/your-org/spfx-copilot-dashboard.git
+cd spfx-copilot-dashboard
+```
+
+### Install Dependencies
+```bash
+npm install
+```
+
+> [!IMPORTANT]
+> Since the current used version of SPFx is a pre-release version, you need to perform a workaround to use `fast-serve`. A small guide can be found here: [Fast-Serve with SPFx pre-release version](SPFx%20fast%20serve%20with%20pre-release%20version.md).
+
+### Build the Solution
+```bash
+gulp build
+```
+
+### Run in Development Mode
+```bash
+gulp serve
+```
+
+If you prefer using fast-serve, you can run the following command:
+
+```bash
+npm run serve
+```
+
+> Open **https://your-sharepoint-site/_layouts/15/workbench.aspx** to test locally.
+
+### Deploy to SharePoint
+1. Build the package:  
+   ```bash
+   gulp bundle --ship
+   gulp package-solution --ship
+   ```
+2. Upload the `.sppkg` file from `./sharepoint/solution/` to the **App Catalog**.
+3. Deploy the app and add it to your SharePoint site.
+
+---
+
+## 🖥️ Usage
+1. Navigate to the **SPO Agent Dashboard** web part.
+2. Browse the list of available AI Agents.
+3. Click on an agent to open a **popup modal** with detailed information.
+4. Decide whether to interact with the agent.
+
+---
+
+## 🔧 Technologies Used
+
+![version](https://img.shields.io/badge/version-1.21.0_preview-green.svg)
+
+- **SharePoint Framework (SPFx)**
+- **React**
+- **TypeScript**
+- **Fluent UI**
+- **Microsoft 365 APIs**
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**.
+
+---

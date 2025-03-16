@@ -1,0 +1,33 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.btnGradient {
+  background-image: linear-gradient(
+    to right, 
+    #07A0C3 0%, /* Slightly deeper teal start */
+    #0CC0DF 15%, /* Original teal moved to 15% */
+    #7558F8 35%, /* Purple shifted slightly */
+    #EB4899 60%, /* Pink remains at same position */
+    #F5B050 100% /* Yellow remains at end */
+  );
+  margin: 16px 0px;
+  padding: 0px 18px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;            
+  box-shadow: 0 0 20px rgba(12, 192, 223, 0.4);
+  border-radius: 10px;
+  display: block;
+}
+
+.btnGradient:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 0 25px rgba(117, 88, 248, 0.6);
+}

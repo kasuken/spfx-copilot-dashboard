@@ -1,8 +1,8 @@
 declare interface IDashboardWebPartStrings {
-	Title: string;
-	Messages: {
-		NoCopilotFound: string;
-	};
+	PropertyPaneDescription: string;
+  ConfigurationsGroupName: string;
+  TitleFieldLabel: string;
+  FilterQuerySourceLabel: string;
 }
 
 declare module 'DashboardWebPartStrings' {
